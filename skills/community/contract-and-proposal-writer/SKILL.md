@@ -1,6 +1,6 @@
 ---
 name: contract-and-proposal-writer
-description: "Contract & Proposal Writer"
+description: "Use when drafting a freelance contract, proposal, SOW, NDA or MSA for US, EU, UK or DACH jurisdictions. Writes structured Markdown with docx conversion steps; not legal advice."
 source: github.com/alirezarezvani/claude-skills
 original-name: contract-and-proposal-writer
 ---
@@ -423,4 +423,3 @@ Data transfers outside EEA covered by: [ ] SCCs  [ ] Adequacy Decision  [ ] BCRs
 - Keep templates in version control; track changes with `git diff`
 - Review annually - laws change, especially GDPR enforcement interpretations
 - For NDAs: always specify the return/destruction of confidential materials on termination
-

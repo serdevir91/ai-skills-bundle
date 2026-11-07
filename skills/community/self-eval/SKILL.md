@@ -1,6 +1,6 @@
 ---
 name: self-eval
-description: "Honestly evaluate AI work quality using a two-axis scoring system. Use after completing a task, code review, or work session to get an unbiased assessment. Detects score inflation, forces devil's advocate reasoning, and persists scores across sessions."
+description: "Grade finished work honestly on two axes with a devil's-advocate pass against inflation. Use whenever the user asks how well a task went, to rate the work or for an honest self-review."
 license: "MIT"
 source: github.com/alirezarezvani/claude-skills
 original-name: self-eval
@@ -181,4 +181,3 @@ Present your evaluation as:
 - Resolution: [final reasoning]
 
 **Score: [1-5]** — [1-sentence final justification]
-

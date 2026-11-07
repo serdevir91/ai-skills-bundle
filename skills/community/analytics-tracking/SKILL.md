@@ -1,6 +1,6 @@
 ---
 name: analytics-tracking
-description: "Set up, audit, and debug analytics tracking implementation — GA4, Google Tag Manager, event taxonomy, conversion tracking, and data quality. Use when building a tracking plan from scratch, auditing existing analytics for gaps or errors, debugging missing events, or setting up GTM. Trigger keywords: GA4 setup, Google Tag Manager, GTM, event tracking, analytics implementation, conversion tracking, tracking plan, event taxonomy, custom dimensions, UTM tracking, analytics audit, missing events, tracking broken. NOT for analyzing marketing campaign data — use campaign-analytics for that. NOT for BI dashboards — use product-analytics for in-product event analysis."
+description: "Use for any GA4, Google Tag Manager, event-tracking or conversion-tracking setup, audit or broken-event debug, before touching tags. Generates the event taxonomy and tracking plan with tracking_plan_generator.py. Campaign performance analysis: campaign-analytics."
 license: MIT
 metadata:
   version: 1.0.0
@@ -20,7 +20,7 @@ Bad tracking is worse than no tracking. Duplicate events, missing parameters, un
 ## Before Starting
 
 **Check for context first:**
-If `marketing-context.md` exists, read it before asking questions. Use that context and only ask for what's missing.
+If `.claude/product-marketing-context.md` exists, read it before asking questions. Use that context and only ask for what's missing.
 
 Gather this context:
 
@@ -43,7 +43,17 @@ Gather this context:
 ## How This Skill Works
 
 ### Mode 1: Set Up From Scratch
-No analytics in place — we'll build the tracking plan, implement GA4 and GTM, define the event taxonomy, and configure conversions.
+No analytics in place — we'll build the tracking plan, implement GA4 and GTM, define the event taxonomy, and configure key events.
+
+Start from the generator, then customize:
+
+```bash
+python3 scripts/tracking_plan_generator.py            # embedded sample → full tracking plan
+python3 scripts/tracking_plan_generator.py plan.json  # your funnel definition
+python3 scripts/tracking_plan_generator.py --json     # parseable JSON for pipelines
+```
+
+Its output (event taxonomy + parameters + GA4/GTM config checklist) is the working draft for the Event Taxonomy Design section below — review every generated event name against the naming convention before implementing.
 
 ### Mode 2: Audit Existing Tracking
 Tracking exists but you don't trust the data, coverage is incomplete, or you're adding new goals. We'll audit what's there, gap-fill, and clean up.
@@ -158,18 +168,18 @@ window.dataLayer.push({
 });
 ```
 
-### Conversions Configuration
+### Key Events Configuration
 
-Mark these events as conversions in GA4 → Admin → Conversions:
+Mark these events as key events in GA4 → Admin → Key events (GA4 renamed "Conversions" to "Key events" in March 2024 — "conversions" now refers only to Google Ads conversion actions):
 - `signup_completed`
 - `checkout_completed`
 - `demo_requested`
 - `trial_started` (if separate from signup)
 
 **Rules:**
-- Max 30 conversion events per property — curate, don't mark everything
-- Conversions are retroactive in GA4 — turning one on applies to 6 months of history
-- Don't mark micro-conversions as conversions unless you're optimizing ad campaigns for them
+- Max 30 key events per property — curate, don't mark everything
+- Key events are retroactive in GA4 — turning one on applies to 6 months of history
+- Don't mark micro-conversions as key events unless you're also optimizing ad campaigns for them
 
 ---
 
@@ -350,7 +360,7 @@ Surface these without being asked:
 | "Set up GTM" | Tag/trigger/variable configuration for each event, container setup checklist |
 | "Debug missing events" | Structured debugging steps using GTM Preview + GA4 DebugView + Network tab |
 | "Set up conversion tracking" | Conversion action configuration for GA4 + Google Ads + Meta |
-| "Generate tracking plan" | Run `scripts/tracking_plan_generator.py` with your inputs |
+| "Generate tracking plan" | Run `python3 scripts/tracking_plan_generator.py [plan.json] [--json]` — event taxonomy + GA4/GTM checklist |
 
 ---
 
@@ -371,3 +381,9 @@ All output follows the structured communication standard:
 - **analytics-tracking** (this skill): covers setup only. For dashboards and reporting, use campaign-analytics.
 - **seo-audit**: Use for technical SEO. NOT for analytics tracking (though both use GA4 data).
 - **gdpr-dsgvo-expert**: Use for GDPR compliance posture. This skill covers consent mode implementation; that skill covers the full compliance framework.
+
+## More in this skill
+
+Load these only when the task needs them.
+
+- [references/debugging-playbook.md](references/debugging-playbook.md) — Tracking Debug Playbook

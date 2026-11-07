@@ -1,14 +1,17 @@
 ---
 name: cs-onboard
-description: Founder onboarding interview that captures company context across 7 dimensions. Invoke with /cs:setup for initial interview or /cs:update for quarterly refresh. Generates ~/.claude/company-context.md used by all C-suite advisor skills.
+description: "Use when setting up the C-suite advisors for the first time, or when company context is missing or stale after a raise or pivot. Interviews the founder across 7 dimensions and writes ~/.claude/company-context.md."
 license: MIT
-version: 1.0.0
-author: Alireza Rezvani
-category: c-level
-dependencies: None
-tier: BASIC
+metadata:
+  version: 1.0.0
+  author: Alireza Rezvani
+  category: c-level
+  domain: orchestration
+  updated: 2026-03-05
+  frameworks: founder-interview, context-capture, quarterly-refresh
+source: github.com/alirezarezvani/claude-skills
+original-name: cs-onboard
 ---
-
 
 # C-Suite Onboarding
 
@@ -16,8 +19,8 @@ Structured founder interview that builds the company context file powering every
 
 ## Commands
 
-- `/cs:setup` — Full onboarding interview (~45 min, 7 dimensions)
-- `/cs:update` — Quarterly refresh (~15 min, "what changed?")
+- `/cs-onboard setup` — Full onboarding interview (~45 min, 7 dimensions)
+- `/cs-onboard update` — Quarterly refresh (~15 min, "what changed?")
 
 ## Keywords
 cs:setup, cs:update, company context, founder interview, onboarding, company profile, c-suite setup, advisor setup
@@ -75,11 +78,11 @@ After the interview, generate `~/.claude/company-context.md` using `templates/co
 
 Fill every section. Write `[not captured]` for unknowns — never leave blank. Add timestamp, mark as `fresh`.
 
-Tell the founder: *"I've captured everything in your company context. Every advisor will use this to give specific, relevant advice. Run /cs:update in 90 days to keep it current."*
+Tell the founder: *"I've captured everything in your company context. Every advisor will use this to give specific, relevant advice. Run /cs-onboard update in 90 days to keep it current."*
 
 ---
 
-## /cs:update — Quarterly Refresh
+## /cs-onboard update — Quarterly Refresh
 
 **Trigger:** Every 90 days or after a major change. Duration: ~15 minutes.
 
@@ -105,41 +108,3 @@ Update the context file, refresh timestamp, reset to `fresh`.
 ## References
 - `templates/company-context-template.md` — blank template for output
 - `references/interview-guide.md` — deep interview craft: probes, red flags, handling reluctant founders
-
-## Name
-
-Claude Community:Cs Onboard
-
-## Description
-
-Founder onboarding interview that captures company context across 7 dimensions. Invoke with /cs:setup for initial interview or /cs:update for quarterly refresh. Generates ~/.claude/company-context.md used by all C-suite advisor skills.
-
-## Usage
-
-### How to Use
-
-1. Activate this skill by mentioning relevant keywords
-2. Provide your specific requirements or context
-3. Review and apply the generated output
-
-### Example Prompts
-
-- "Help me with cs onboard"
-- "I need assistance with cs onboard for my project"
-- "Apply cs onboard best practices"
-
-## Examples
-
-### Basic Usage
-
-```
-User: Help me with cs onboard
-Assistant: [Provides detailed guidance based on the skill's expertise]
-```
-
-### Advanced Usage
-
-```
-User: Apply cs onboard to my current project
-Assistant: [Analyzes context and provides tailored recommendations]
-```

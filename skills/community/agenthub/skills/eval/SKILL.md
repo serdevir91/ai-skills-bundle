@@ -1,21 +1,22 @@
 ---
 name: agenthub/skills/eval
-description: "Evaluate and rank agent results by metric or LLM judge for an AgentHub session."
-command: /hub:eval
+description: "Rank finished AgentHub agents by metric or judge. Use when asked which agent won."
+metadata:
+  command: /agenthub:eval
 source: github.com/alirezarezvani/claude-skills
-original-name: agenthub/skills/eval
+original-name: eval
 ---
 
-# /hub:eval — Evaluate Agent Results
+# /agenthub:eval — Evaluate Agent Results
 
 Rank all agent results for a session. Supports metric-based evaluation (run a command), LLM judge (compare diffs), or hybrid.
 
 ## Usage
 
 ```
-/hub:eval                           # Eval latest session using configured criteria
-/hub:eval 20260317-143022           # Eval specific session
-/hub:eval --judge                   # Force LLM judge mode (ignore metric config)
+/agenthub:eval                           # Eval latest session using configured criteria
+/agenthub:eval 20260317-143022           # Eval specific session
+/agenthub:eval --judge                   # Force LLM judge mode (ignore metric config)
 ```
 
 ## What It Does
@@ -78,5 +79,5 @@ python {skill_path}/scripts/session_manager.py --update {session-id} --state eva
 
 2. Tell the user:
    - Ranked results with winner highlighted
-   - Next step: `/hub:merge` to merge the winner
-   - Or `/hub:merge {session-id} --agent {winner}` to be explicit
+   - Next step: `/agenthub:merge` to merge the winner
+   - Or `/agenthub:merge {session-id} --agent {winner}` to be explicit

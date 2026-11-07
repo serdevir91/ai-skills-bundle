@@ -133,7 +133,6 @@ class AgentEvaluator:
     def __init__(self):
         self.error_patterns = self._define_error_patterns()
         self.performance_thresholds = self._define_performance_thresholds()
-        self.cost_benchmarks = self._define_cost_benchmarks()
     
     def _define_error_patterns(self) -> Dict[str, Dict[str, Any]]:
         """Define common error patterns and their classifications"""
@@ -217,23 +216,15 @@ class AgentEvaluator:
             "throughput": {"excellent": 100, "good": 50, "acceptable": 20, "poor": 5}  # tasks per hour
         }
     
-    def _define_cost_benchmarks(self) -> Dict[str, Any]:
-        """Define cost benchmarks for different operations"""
-        return {
-            "token_costs": {
-                "gpt-4": {"input": 0.00003, "output": 0.00006},
-                "gpt-3.5-turbo": {"input": 0.000002, "output": 0.000002},
-                "claude-3": {"input": 0.000015, "output": 0.000075}
-            },
-            "operation_costs": {
-                "simple_task": 0.005,
-                "complex_task": 0.050,
-                "research_task": 0.020,
-                "analysis_task": 0.030,
-                "generation_task": 0.015
-            }
-        }
-    
+    # _define_cost_benchmarks() was removed. It hardcoded per-token prices for
+    # gpt-4, gpt-3.5-turbo and claude-3 — all retired, all priced at 2024
+    # rates — and the result was assigned to self.cost_benchmarks and never
+    # read by anything. Cost analysis in this tool uses the cost_usd field the
+    # caller supplies in each execution log, which is the only figure that can
+    # be accurate. See engineering-team/skills/senior-prompt-engineer/scripts/
+    # prompt_optimizer.py for the --price-per-mtok pattern if a price is
+    # genuinely needed.
+
     def parse_execution_logs(self, logs_data: List[Dict[str, Any]]) -> List[ExecutionLog]:
         """Parse raw execution logs into structured format"""
         logs = []
@@ -777,6 +768,7 @@ class AgentEvaluator:
                     "latency_reduction": min(0.5, (system_metrics.average_duration_ms - 5000) / system_metrics.average_duration_ms),
                     "throughput_improvement": 1.5
                 },
+                estimated_cost_savings=None,
                 estimated_performance_gain=1.4,
                 implementation_steps=[
                     "Profile and optimize slow operations",
@@ -803,6 +795,7 @@ class AgentEvaluator:
                         "reliability_improvement": 1.1
                     },
                     estimated_cost_savings=system_metrics.total_cost_usd * (error_analysis.percentage / 100) * 0.5,
+                    estimated_performance_gain=None,
                     implementation_steps=error_analysis.suggested_fixes,
                     risks=["May require significant code changes"],
                     prerequisites=["Root cause analysis", "Testing framework"]
@@ -818,6 +811,7 @@ class AgentEvaluator:
                 description=bottleneck.description,
                 implementation_effort="medium",
                 expected_impact=bottleneck.estimated_improvement,
+                estimated_cost_savings=None,
                 estimated_performance_gain=list(bottleneck.estimated_improvement.values())[0] if bottleneck.estimated_improvement else 1.1,
                 implementation_steps=bottleneck.optimization_suggestions,
                 risks=["System downtime during implementation", "Potential cascade effects"],
@@ -836,6 +830,7 @@ class AgentEvaluator:
                     "throughput_improvement": 2.0,
                     "scalability_headroom": 5.0
                 },
+                estimated_cost_savings=None,
                 estimated_performance_gain=2.0,
                 implementation_steps=[
                     "Implement horizontal scaling for agents",

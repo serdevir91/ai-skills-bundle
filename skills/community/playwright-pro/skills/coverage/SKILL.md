@@ -1,11 +1,8 @@
 ---
 name: playwright-pro/skills/coverage
-description: >-
-  Analyze test coverage gaps. Use when user says "test coverage",
-  "what's not tested", "coverage gaps", "missing tests", "coverage report",
-  or "what needs testing".
+description: "Find what is not tested: map untested pages and flows and coverage gaps. Use whenever the user asks what needs tests, about missing tests or test coverage."
 source: github.com/alirezarezvani/claude-skills
-original-name: playwright-pro/skills/coverage
+original-name: coverage
 ---
 
 # Analyze Test Coverage Gaps

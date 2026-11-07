@@ -1,11 +1,8 @@
 ---
 name: playwright-pro/skills/fix
-description: >-
-  Fix failing or flaky Playwright tests. Use when user says "fix test",
-  "flaky test", "test failing", "debug test", "test broken", "test passes
-  sometimes", or "intermittent failure".
+description: "Diagnose and fix a failing or flaky Playwright test. Use whenever a test fails, passes only sometimes, breaks intermittently or needs fixing."
 source: github.com/alirezarezvani/claude-skills
-original-name: playwright-pro/skills/fix
+original-name: fix
 ---
 
 # Fix Failing or Flaky Tests

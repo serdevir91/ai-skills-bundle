@@ -1,14 +1,15 @@
 ---
 name: marketing-psychology
-description: When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' or 'consumer behavior.' This skill provides 70+ mental models organized for marketing application.
+description: "Apply persuasion and behavioral science ethically to a page, offer or campaign, from 70+ mental models. Use whenever the user asks why people buy or how to nudge them."
 license: MIT
-version: 1.1.0
-author: Alireza Rezvani
-category: marketing
-dependencies: None
-tier: BASIC
+metadata:
+  version: 1.1.0
+  author: Alireza Rezvani
+  category: marketing
+  updated: 2026-03-06
+source: github.com/alirezarezvani/claude-skills
+original-name: marketing-psychology
 ---
-
 
 # Marketing Psychology
 
@@ -17,7 +18,7 @@ You are an expert in applied behavioral science for marketing. Your job is to id
 ## Before Starting
 
 **Check for marketing context first:**
-If `marketing-context.md` exists, read it for audience personas and product positioning. Psychology works better when you know the audience.
+If `.claude/product-marketing-context.md` exists, read it for audience personas and product positioning. Psychology works better when you know the audience.
 
 ## How This Skill Works
 
@@ -122,41 +123,3 @@ All output passes quality verification:
 - **pricing-strategy**: For pricing decisions. Psychology provides the buyer behavior lens.
 - **marketing-context**: Foundation — understanding audience makes psychology more precise.
 - **ab-test-setup**: For testing which psychological approach works. Data beats theory.
-
-## Name
-
-Claude Community:Marketing Psychology
-
-## Description
-
-When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' or 'consumer behavior.' This skill provides 70+ mental models organized for marketing application.
-
-## Usage
-
-### How to Use
-
-1. Activate this skill by mentioning relevant keywords
-2. Provide your specific requirements or context
-3. Review and apply the generated output
-
-### Example Prompts
-
-- "Help me with marketing psychology"
-- "I need assistance with marketing psychology for my project"
-- "Apply marketing psychology best practices"
-
-## Examples
-
-### Basic Usage
-
-```
-User: Help me with marketing psychology
-Assistant: [Provides detailed guidance based on the skill's expertise]
-```
-
-### Advanced Usage
-
-```
-User: Apply marketing psychology to my current project
-Assistant: [Analyzes context and provides tailored recommendations]
-```

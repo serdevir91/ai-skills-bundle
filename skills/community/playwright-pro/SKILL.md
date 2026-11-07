@@ -1,8 +1,8 @@
 ---
 name: playwright-pro
-description: "Production-grade Playwright testing toolkit. Use when the user mentions Playwright tests, end-to-end testing, browser automation, fixing flaky tests, test migration, CI/CD testing, or test suites. Generate tests, fix flaky failures, migrate from Cypress/Selenium, sync with TestRail, run on BrowserStack. 55 templates, 3 agents, smart reporting."
+description: "Use for any Playwright or end-to-end browser testing work: writing tests, fixing flaky ones, migrating from Cypress or Selenium, CI setup, TestRail or BrowserStack. Routes to the matching /pw sub-skill and its 55 templates."
 source: github.com/alirezarezvani/claude-skills
-original-name: playwright-pro
+original-name: pw
 ---
 
 # Playwright Pro
@@ -15,9 +15,9 @@ When installed as a Claude Code plugin, these are available as `/pw:` commands:
 
 | Command | What it does |
 |---|---|
-| `/pw:init` | Set up Playwright — detects framework, generates config, CI, first test |
+| `/pw:pw-init` | Set up Playwright — detects framework, generates config, CI, first test |
 | `/pw:generate <spec>` | Generate tests from user story, URL, or component |
-| `/pw:review` | Review tests for anti-patterns and coverage gaps |
+| `/pw:pw-review` | Review tests for anti-patterns and coverage gaps |
 | `/pw:fix <test>` | Diagnose and fix failing or flaky tests |
 | `/pw:migrate` | Migrate from Cypress or Selenium to Playwright |
 | `/pw:coverage` | Analyze what's tested vs. what's missing |
@@ -30,14 +30,14 @@ When installed as a Claude Code plugin, these are available as `/pw:` commands:
 The recommended sequence for most projects:
 
 ```
-1. /pw:init          → scaffolds config, CI pipeline, and a first smoke test
+1. /pw:pw-init          → scaffolds config, CI pipeline, and a first smoke test
 2. /pw:generate      → generates tests from your spec or URL
-3. /pw:review        → validates quality and flags anti-patterns      ← always run after generate
+3. /pw:pw-review        → validates quality and flags anti-patterns      ← always run after generate
 4. /pw:fix <test>    → diagnoses and repairs any failing/flaky tests  ← run when CI turns red
 ```
 
 **Validation checkpoints:**
-- After `/pw:generate` — always run `/pw:review` before committing; it catches locator anti-patterns and missing assertions automatically.
+- After `/pw:generate` — always run `/pw:pw-review` before committing; it catches locator anti-patterns and missing assertions automatically.
 - After `/pw:fix` — re-run the full suite locally (`npx playwright test`) to confirm the fix doesn't introduce regressions.
 - After `/pw:migrate` — run `/pw:coverage` to confirm parity with the old suite before decommissioning Cypress/Selenium tests.
 
@@ -51,7 +51,7 @@ The recommended sequence for most projects:
 # → Playwright Pro creates the file using the auth template.
 
 # 2. Review the generated tests
-/pw:review tests/auth/login.spec.ts
+/pw:pw-review tests/auth/login.spec.ts
 
 # → Flags: one test used page.locator('input[type=password]') — suggests getByLabel('Password')
 # → Fix applied automatically.
@@ -93,12 +93,19 @@ npx playwright test tests/auth/login.spec.ts --headed
 - **9 skills** with detailed step-by-step instructions
 - **3 specialized agents**: test-architect, test-debugger, migration-planner
 - **55 test templates**: auth, CRUD, checkout, search, forms, dashboard, settings, onboarding, notifications, API, accessibility
-- **2 MCP servers** (TypeScript): TestRail and BrowserStack integrations
+- **2 MCP servers** (TypeScript): TestRail and BrowserStack integrations *(optional — not auto-registered; see Integration Setup)*
 - **Smart hooks**: auto-validate test quality, auto-detect Playwright projects
 - **6 reference docs**: golden rules, locators, assertions, fixtures, pitfalls, flaky tests
 - **Migration guides**: Cypress and Selenium mapping tables
 
 ## Integration Setup
+
+> **Not auto-registered (issue #978).** The TestRail and BrowserStack MCP servers
+> are no longer declared in the plugin's `.mcp.json` (they failed to connect for
+> every user — no bundled `node_modules`). Exporting the env vars below is not
+> enough: `/pw:testrail` / `/pw:browserstack` fail with "tool not found" until you
+> enable the server manually (`cd integrations/<name>-mcp && npm install`, then
+> register it in your own user/project MCP config). See `CLAUDE.md` → Integrations.
 
 ### TestRail (Optional)
 ```bash
@@ -124,4 +131,3 @@ See `reference/` directory for:
 - `flaky-tests.md` — Diagnosis commands and quick fixes
 
 See `templates/README.md` for the full template index.
-

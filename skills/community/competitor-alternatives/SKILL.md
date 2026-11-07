@@ -1,6 +1,6 @@
 ---
 name: competitor-alternatives
-description: "When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'comparison page,' '[Product] vs [Product],' '[Product] alternative,' 'competitive landing pages,' 'switch from competitor,' or 'comparison content.' Covers four formats: singular alternative, plural alternatives, you vs competitor, and competitor vs competitor. Emphasizes deep research, modular content architecture, and varied section types beyond feature tables."
+description: "Use when creating an 'X vs Y', '[product] alternative' or comparison page, before drafting. Builds the comparison matrix with comparison_matrix_builder.py and picks one of four page formats with a fair, sourced structure."
 license: MIT
 metadata:
   version: 1.0.0
@@ -262,6 +262,16 @@ Proactively offer competitor page creation when:
 3. **SEO gap identified** — Keyword research shows competitor-branded terms with no coverage; propose a full alternative page set with prioritized build order.
 4. **Switcher testimonial available** — When a customer quote about switching surfaces, offer to build a migration-focused alternative page around it.
 5. **Pricing page review** — When reviewing pricing, note that pricing comparison tables belong on dedicated competitor pages, not the pricing page itself.
+
+---
+
+## Tools
+
+| Tool | Invocation | Output |
+|---|---|---|
+| Comparison matrix builder | `python3 scripts/comparison_matrix_builder.py --input competitors.json --markdown` (no input = embedded demo; `--json` for pipelines) | Feature-by-feature comparison matrix ready to paste into the vs-page comparison table |
+
+Feed it the Competitor Intelligence File data (features + pricing per competitor); its markdown output is the canonical comparison table for every Vs Page below — don't hand-build the table.
 
 ---
 

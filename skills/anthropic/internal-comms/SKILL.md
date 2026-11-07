@@ -2,13 +2,9 @@
 name: internal-comms
 description: A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).
 license: Complete terms in LICENSE.txt
-version: 1.0.0
-author: Community
-category: general
-dependencies: None
-tier: BASIC
+source: github.com/anthropics/skills
+original-name: internal-comms
 ---
-
 
 ## When to use this skill
 To write internal communications, use this skill for:
@@ -36,60 +32,3 @@ If the communication type doesn't match any existing guideline, ask for clarific
 
 ## Keywords
 3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms
-
-## Name
-
-Anthropic:Internal Comms
-
-## Description
-
-A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).
-
-## Examples
-
-### Basic Usage
-
-```
-User: Help me with internal comms
-Assistant: [Provides detailed guidance based on the skill's expertise]
-```
-
-### Advanced Usage
-
-```
-User: Apply internal comms to my current project
-Assistant: [Analyzes context and provides tailored recommendations]
-```
-
-## Additional Information
-
-This skill provides specialized guidance for internal comms.
-
-### Key Capabilities
-
-- Comprehensive analysis and recommendations
-- Best practices implementation
-- Industry-standard approaches
-- Practical, actionable guidance
-
-### Best Practices
-
-1. Provide clear context when using this skill
-2. Specify your requirements and constraints
-3. Review generated suggestions before implementation
-4. Iterate and refine based on feedback
-
-### Tips
-
-- Be specific about your goals and constraints
-- Provide relevant background information
-- Ask follow-up questions for clarification
-- Combine with other skills for comprehensive solutions
-
-## Related Skills
-
-See the skills directory for complementary skills that may enhance your workflow.
-
-## Support
-
-For issues or questions, refer to the skill documentation or community resources.

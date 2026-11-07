@@ -1,10 +1,8 @@
 ---
 name: playwright-pro/skills/report
-description: >-
-  Generate test report. Use when user says "test report", "results summary",
-  "test status", "show results", "test dashboard", or "how did tests go".
+description: "Summarize Playwright results. Use whenever the user asks how tests went, for a test report or status."
 source: github.com/alirezarezvani/claude-skills
-original-name: playwright-pro/skills/report
+original-name: report
 ---
 
 # Smart Test Reporting

@@ -1,6 +1,6 @@
 ---
 name: gdpr-dsgvo-expert
-description: GDPR and German DSGVO compliance automation. Scans codebases for privacy risks, generates DPIA documentation, tracks data subject rights requests. Use for GDPR compliance assessments, privacy audits, data protection planning, DPIA generation, and data subject rights management.
+description: "Use for GDPR or DSGVO work: scanning a codebase for privacy risks, writing a DPIA or tracking data subject requests against the Art. 12(3) deadline. Runs gdpr_compliance_checker.py, dpia_generator.py and data_subject_rights_tracker.py; final calls go to the DPO."
 source: github.com/alirezarezvani/claude-skills
 original-name: gdpr-dsgvo-expert
 ---
@@ -77,7 +77,7 @@ python scripts/dpia_generator.py --input input.json --output dpia_report.md
 - Systematic monitoring (Art. 35(3)(c))
 - Large-scale special category data (Art. 35(3)(b))
 - Automated decision-making (Art. 35(3)(a))
-- WP29 high-risk criteria
+- EDPB-endorsed high-risk criteria (WP248 rev.01)
 
 ---
 
@@ -107,13 +107,13 @@ python scripts/data_subject_rights_tracker.py template --id DSR-202601-0001
 
 | Right | Article | Deadline |
 |-------|---------|----------|
-| Access | Art. 15 | 30 days |
-| Rectification | Art. 16 | 30 days |
-| Erasure | Art. 17 | 30 days |
-| Restriction | Art. 18 | 30 days |
-| Portability | Art. 20 | 30 days |
-| Objection | Art. 21 | 30 days |
-| Automated decisions | Art. 22 | 30 days |
+| Access | Art. 15 | One month (Art. 12(3)) |
+| Rectification | Art. 16 | One month (Art. 12(3)) |
+| Erasure | Art. 17 | One month (Art. 12(3)) |
+| Restriction | Art. 18 | One month (Art. 12(3)) |
+| Portability | Art. 20 | One month (Art. 12(3)) |
+| Objection | Art. 21 | One month (Art. 12(3)) |
+| Automated decisions | Art. 22 | One month (Art. 12(3)) |
 
 **Features:**
 - Deadline tracking with overdue alerts
@@ -152,7 +152,7 @@ German-specific requirements including:
 
 Step-by-step DPIA process:
 - Threshold assessment criteria
-- WP29 high-risk indicators
+- EDPB-endorsed high-risk indicators (WP248 rev.01)
 - Risk assessment methodology
 - Mitigation measure categories
 - DPO and supervisory authority consultation
@@ -250,7 +250,7 @@ Requires explicit consent or Art. 9(2) exception:
 
 ### Data Subject Rights
 
-All rights must be fulfilled within **30 days** (extendable to 90 for complex requests):
+All rights must be fulfilled within **one month of receipt** (Art. 12(3)). The deadline runs by calendar month, not 30 days, and may be extended by **two further months** for complex or numerous requests — the data subject must be informed of the extension (with reasons) within the first month:
 - **Access**: Provide copy of data and processing information
 - **Rectification**: Correct inaccurate data
 - **Erasure**: Delete data (with exceptions for legal obligations)
@@ -266,3 +266,9 @@ All rights must be fulfilled within **30 days** (extendable to 90 for complex re
 | Employment | § 26 | Detailed employee data rules |
 | Video | § 4 | Signage and proportionality |
 | Scoring | § 31 | Explainable algorithms |
+
+## More in this skill
+
+Load these only when the task needs them.
+
+- [references/gdpr_audit_playbook.md](references/gdpr_audit_playbook.md) — GDPR / DSGVO Compliance Audit Playbook

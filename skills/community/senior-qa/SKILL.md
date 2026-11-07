@@ -1,6 +1,6 @@
 ---
 name: senior-qa
-description: Generates unit tests, integration tests, and E2E tests for React/Next.js applications. Scans components to create Jest + React Testing Library test stubs, analyzes Istanbul/LCOV coverage reports to surface gaps, scaffolds Playwright test files from Next.js routes, mocks API calls with MSW, creates test fixtures, and configures test runners. Use when the user asks to "generate tests", "write unit tests", "analyze test coverage", "scaffold E2E tests", "set up Playwright", "configure Jest", "implement testing patterns", or "improve test quality".
+description: "Write and improve tests for React or Next.js apps: Jest, React Testing Library, MSW mocks, Playwright E2E, coverage gaps. Use whenever the user asks to add tests to a component or page, mock an API, set up end-to-end tests or raise coverage."
 source: github.com/alirezarezvani/claude-skills
 original-name: senior-qa
 ---
@@ -122,7 +122,7 @@ import { Button } from '../src/components/Button';
 describe('Button', () => {
   it('renders with label', () => {
     render(<Button>Click me</Button>);
-    expect(screen.getByRole('button', { name: "click-mei-tobeinthedocument"
+    expect(screen.getByRole('button', { name: /click me/i })).toBeInTheDocument();
   });
 
   it('calls onClick when clicked', () => {
@@ -219,7 +219,7 @@ npx playwright show-report
 - name: "run-e2e-tests"
   run: npx playwright test
 - name: "upload-report"
-  uses: actions/upload-artifact@v3
+  uses: actions/upload-artifact@v4
   with:
     name: "playwright-report"
     path: playwright-report/
@@ -243,7 +243,7 @@ npx playwright show-report
 
 ```typescript
 // Preferred (accessible)
-screen.getByRole('button', { name: "submiti"
+screen.getByRole('button', { name: /submit/i })
 screen.getByLabelText(/email/i)
 screen.getByPlaceholderText(/search/i)
 

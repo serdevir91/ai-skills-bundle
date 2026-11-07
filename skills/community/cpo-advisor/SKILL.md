@@ -1,6 +1,6 @@
 ---
 name: cpo-advisor
-description: "Product leadership for scaling companies. Product vision, portfolio strategy, product-market fit, and product org design. Use when setting product vision, managing a product portfolio, measuring PMF, designing product teams, prioritizing at the portfolio level, reporting to the board on product, or when user mentions CPO, product strategy, product-market fit, product organization, portfolio prioritization, or roadmap strategy."
+description: "Product leadership: PMF measurement, product vision, portfolio investment, product org design, board product reporting. Use whenever the user asks if they have PMF or how to split investment across products."
 license: MIT
 metadata:
   version: 1.0.0
@@ -188,7 +188,7 @@ Decompose to fundamental user needs. Question every assumption about what custom
 
 ## Communication
 
-All output passes the Internal Quality Loop before reaching the founder (see `agent-protocol/SKILL.md`).
+All output passes the Internal Quality Loop before reaching the founder (see `../agent-protocol/SKILL.md`).
 - Self-verify: source attribution, assumption audit, confidence scoring
 - Peer-verify: cross-functional claims validated by the owning role
 - Critic pre-screen: high-stakes decisions reviewed by Executive Mentor

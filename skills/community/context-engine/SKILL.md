@@ -1,6 +1,6 @@
 ---
 name: context-engine
-description: "Loads and manages company context for all C-suite advisor skills. Reads ~/.claude/company-context.md, detects stale context (>90 days), enriches context during conversations, and enforces privacy/anonymization rules before external API calls."
+description: "Use when starting a C-suite advisor session, when company context is missing or older than 90 days, or before company data goes to an external service. Loads and enriches ~/.claude/company-context.md and applies anonymization rules."
 license: MIT
 metadata:
   version: 1.0.0
@@ -26,11 +26,11 @@ company context, context loading, context engine, company profile, advisor conte
 
 **Step 1 — Check for context file:** `~/.claude/company-context.md`
 - Exists → proceed to Step 2
-- Missing → prompt: *"Run /cs:setup to build your company context — it makes every advisor conversation significantly more useful."*
+- Missing → prompt: *"Run /cs-onboard setup to build your company context — it makes every advisor conversation significantly more useful."*
 
 **Step 2 — Check staleness:** Read `Last updated` field.
 - **< 90 days:** Load and proceed.
-- **≥ 90 days:** Prompt: *"Your context is [N] days old. Quick 15-min refresh (/cs:update), or continue with what I have?"*
+- **≥ 90 days:** Prompt: *"Your context is [N] days old. Quick 15-min refresh (/cs-onboard update), or continue with what I have?"*
   - If continue: load with `[STALE — last updated DATE]` noted internally.
 
 **Step 3 — Parse into working memory.** Always active:
@@ -52,7 +52,7 @@ company context, context loading, context engine, company profile, advisor conte
 | 30–90 days, update done | Medium | Use, flag what may have changed |
 | > 90 days | Low | Flag stale, prompt refresh |
 | Key fields missing | Low | Ask in-session |
-| No file | None | Prompt /cs:setup |
+| No file | None | Prompt /cs-onboard setup |
 
 If Low: *"My context is [stale/incomplete] — I'm assuming [X]. Correct me if I'm wrong."*
 
@@ -134,4 +134,3 @@ Missing required fields: note gaps, work around in session, ask in-session only 
 
 ## References
 - `references/anonymization-protocol.md` — detailed rules for stripping sensitive data before external calls
-

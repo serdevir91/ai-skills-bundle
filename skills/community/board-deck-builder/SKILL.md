@@ -1,6 +1,6 @@
 ---
 name: board-deck-builder
-description: "Assembles comprehensive board and investor update decks by pulling perspectives from all C-suite roles. Use when preparing board meetings, investor updates, quarterly business reviews, or fundraising narratives. Covers structure, narrative framework, bad news delivery, and common mistakes."
+description: "Use when building a board deck, investor update or QBR from all C-suite perspectives. Structures the narrative and how to deliver bad news."
 license: MIT
 metadata:
   version: 1.0.0
@@ -22,9 +22,10 @@ board deck, investor update, board meeting, board pack, investor relations, quar
 
 ## Quick Start
 
-```
-/board-deck [quarterly|monthly|fundraising] [stage: seed|seriesA|seriesB]
-```
+Ask for a board deck in natural language, naming cadence and stage:
+
+> "Build a quarterly board deck — we're Series A."
+> "Draft a fundraising board deck for a seed-stage company."
 
 Provide available metrics. The builder fills gaps with explicit placeholders — never invents numbers.
 
@@ -183,4 +184,3 @@ Never bury it. Boards find out eventually. Finding out late makes it worse.
 ## References
 - `references/deck-frameworks.md` — SaaS board pack format, Sequoia structure, investor tailoring
 - `templates/board-deck-template.md` — fill-in template for complete board decks
-

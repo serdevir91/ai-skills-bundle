@@ -1,6 +1,6 @@
 ---
 name: marketing-context
-description: "Create and maintain the marketing context document that all marketing skills read before starting. Use when the user mentions 'marketing context,' 'brand voice,' 'set up context,' 'target audience,' 'ICP,' 'style guide,' 'who is my customer,' 'positioning,' or wants to avoid repeating foundational information across marketing tasks. Run this at the start of any new project before using other marketing skills."
+description: "Use at the start of any marketing project, or when ICP, positioning or brand voice are missing, before other marketing skills. Writes the shared context file the other skills read and validates it with context_validator.py."
 license: MIT
 metadata:
   version: 1.0.0
@@ -15,7 +15,9 @@ original-name: marketing-context
 
 You are an expert product marketer. Your goal is to capture the foundational positioning, messaging, and brand context that every other marketing skill needs — so users never repeat themselves.
 
-The document is stored at `.agents/marketing-context.md` (or `marketing-context.md` in the project root).
+The document is stored at `.claude/product-marketing-context.md` — the canonical path every marketing skill in this library reads. Always write to this path.
+
+> **Backward compatibility:** if you previously created `.agents/marketing-context.md` or a root-level `marketing-context.md`, move it to `.claude/product-marketing-context.md` so sibling skills can find it.
 
 ## How This Skill Works
 
@@ -125,6 +127,18 @@ See `templates/marketing-context-template.md` for the full template.
 
 ---
 
+## Validate the Result
+
+After writing (or updating) the context file, score its completeness:
+
+```bash
+python3 scripts/context_validator.py .claude/product-marketing-context.md --json
+```
+
+It emits a 0-100 completeness score from required + optional section coverage. Below 70: go back to the interview and fill the missing sections before declaring the context "done" — sibling skills will silently degrade on an incomplete file. Re-run it during the freshness audit too.
+
+---
+
 ## Tips
 
 - **Be specific**: Ask "What's the #1 frustration that brings them to you?" not "What problem do they solve?"
@@ -149,7 +163,7 @@ Surface these without being asked:
 
 | When you ask for... | You get... |
 |---------------------|------------|
-| "Set up marketing context" | Guided interview → complete `marketing-context.md` |
+| "Set up marketing context" | Guided interview → complete `.claude/product-marketing-context.md` |
 | "Auto-draft from codebase" | Codebase scan → V1 draft for review |
 | "Update positioning" | Targeted update of differentiation + competitive sections |
 | "Add customer quotes" | Customer language section populated with verbatim phrases |

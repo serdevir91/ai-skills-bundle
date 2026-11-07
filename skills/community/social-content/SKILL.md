@@ -1,6 +1,6 @@
 ---
 name: social-content
-description: "When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' or 'viral content.' This skill covers content creation, repurposing, and platform-specific strategies."
+description: "Write a LinkedIn post, X thread, Instagram, TikTok or Facebook post with each platform's hook, length and format. Use whenever the user wants a post or thread, or one idea for several platforms."
 license: MIT
 metadata:
   version: 1.0.0
@@ -323,4 +323,3 @@ Always include a hook as the first element. Never deliver body copy without it. 
 - **content-production**: USE when operating a high-volume content machine across multiple creators. NOT for one-off post creation.
 - **content-humanizer**: USE when AI-drafted posts sound robotic or templated. NOT for strategy or scheduling.
 - **launch-strategy**: USE when coordinating social content around a product launch. NOT for evergreen posting schedules.
-

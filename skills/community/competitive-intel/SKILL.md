@@ -1,6 +1,6 @@
 ---
 name: competitive-intel
-description: "Systematic competitor tracking that feeds CMO positioning, CRO battlecards, and CPO roadmap decisions. Use when analyzing competitors, building sales battlecards, tracking market moves, positioning against alternatives, or when user mentions competitive intelligence, competitive analysis, competitor research, battlecards, win/loss, or market positioning."
+description: "Use for competitor analysis, battlecards, win/loss review or positioning against alternatives. Builds a tracking system that feeds positioning, sales and roadmap."
 license: MIT
 metadata:
   version: 1.0.0
@@ -22,13 +22,13 @@ competitive intelligence, competitor analysis, battlecard, win/loss analysis, co
 
 ## Quick Start
 
-```
-/ci:landscape         — Map your competitive space (direct, indirect, future)
-/ci:battlecard [name] — Build a sales battlecard for a specific competitor
-/ci:winloss           — Analyze recent wins and losses by reason
-/ci:update [name]     — Track what a competitor did recently
-/ci:map               — Build competitive positioning map
-```
+Ask in natural language for the deliverable you need:
+
+> "Map our competitive landscape" — direct, indirect, and future competitors
+> "Build a battlecard for [competitor]" — sales-ready battlecard
+> "Run a win/loss analysis" — recent wins and losses by reason
+> "What did [competitor] do recently?" — competitor update tracking
+> "Build a competitive positioning map" — 2x2 positioning map
 
 ## Framework: 5-Layer Intelligence System
 
@@ -203,4 +203,3 @@ This is the highest-signal competitive data you have. Most companies do it too r
 ## References
 - `references/ci-playbook.md` — OSINT sources, win/loss framework, positioning map construction
 - `templates/battlecard-template.md` — sales battlecard template
-

@@ -1,6 +1,6 @@
 ---
 name: form-cro
-description: When the user wants to optimize any form that is NOT signup/registration — including lead capture forms, contact forms, demo request forms, application forms, survey forms, or checkout forms. Also use when the user mentions "form optimization," "lead form conversions," "form friction," "form fields," "form completion rate," or "contact form." For signup/registration forms, see signup-flow-cro. For popups containing forms, see popup-cro.
+description: "Use when a lead, contact, demo or checkout form is underperforming or being designed, before changing fields. Scores field friction with form_field_analyzer.py. Signup forms: signup-flow-cro."
 license: MIT
 metadata:
   version: 1.0.0
@@ -45,7 +45,22 @@ Before providing recommendations, identify:
 ---
 
 ## Core Principles
-→ See references/form-cro-playbook.md for details
+
+The thresholds that drive every form audit (full treatment in references/form-cro-playbook.md):
+
+- **Field count**: every added field costs conversions. Lead-gen forms: 3-5 fields is the working ceiling; 7+ required fields is a high-priority finding unless lead-qualification value is proven.
+- **Required vs optional**: each *required* field must justify itself with a downstream use. "Nice for sales" is not a justification — make it optional or cut it.
+- **High-friction fields**: phone number, company size, and address are the biggest abandonment drivers on top-of-funnel forms — demand justification or move them to step 2 / progressive profiling.
+- **Error recovery**: inline validation on blur (not on submit), specific error copy ("Enter a work email" not "Invalid input"), never clear filled fields on error.
+- **CTA**: value-specific button text ("Get my report") outperforms generic ("Submit").
+
+## Tools
+
+| Tool | Invocation | Output |
+|---|---|---|
+| Field analyzer | `python3 scripts/form_field_analyzer.py forms.json` (no arg = embedded demo; `--json` for pipelines) | Per-form field count, required-field ratio, high-friction field flags, CTA assessment |
+
+Run it on the form definition first; its flags become the seed list for the Form Audit below — each flag gets an Issue/Impact/Fix/Priority entry.
 
 ## Output Format
 

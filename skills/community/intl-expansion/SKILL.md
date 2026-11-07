@@ -1,14 +1,16 @@
 ---
 name: intl-expansion
-description: International market expansion strategy. Market selection, entry modes, localization, regulatory compliance, and go-to-market by region. Use when expanding to new countries, evaluating international markets, planning localization, or building regional teams.
+description: "Use when expanding to a new country: market selection, entry mode, localization, regulation and regional go-to-market."
 license: MIT
-version: 1.0.0
-author: Alireza Rezvani
-category: c-level
-dependencies: None
-tier: BASIC
+metadata:
+  version: 1.0.0
+  author: Alireza Rezvani
+  category: c-level
+  domain: international-strategy
+  updated: 2026-03-05
+source: github.com/alirezarezvani/claude-skills
+original-name: intl-expansion
 ---
-
 
 # International Expansion
 
@@ -103,41 +105,3 @@ international expansion, market entry, localization, go-to-market, GTM, regional
 ## Resources
 - `references/market-entry-playbook.md` — detailed entry playbook by market type
 - `references/regional-guide.md` — specific considerations for key regions (EU, US, APAC, LATAM)
-
-## Name
-
-Claude Community:Intl Expansion
-
-## Description
-
-International market expansion strategy. Market selection, entry modes, localization, regulatory compliance, and go-to-market by region. Use when expanding to new countries, evaluating international markets, planning localization, or building regional teams.
-
-## Usage
-
-### How to Use
-
-1. Activate this skill by mentioning relevant keywords
-2. Provide your specific requirements or context
-3. Review and apply the generated output
-
-### Example Prompts
-
-- "Help me with intl expansion"
-- "I need assistance with intl expansion for my project"
-- "Apply intl expansion best practices"
-
-## Examples
-
-### Basic Usage
-
-```
-User: Help me with intl expansion
-Assistant: [Provides detailed guidance based on the skill's expertise]
-```
-
-### Advanced Usage
-
-```
-User: Apply intl expansion to my current project
-Assistant: [Analyzes context and provides tailored recommendations]
-```

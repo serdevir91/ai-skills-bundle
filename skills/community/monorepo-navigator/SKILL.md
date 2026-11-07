@@ -1,6 +1,6 @@
 ---
 name: monorepo-navigator
-description: "Monorepo Navigator"
+description: "Use for Turborepo, Nx, pnpm-workspace or Lerna setup, affected-only builds, remote caching or a multi-repo to monorepo move. Maps packages and the dependency graph with monorepo_analyzer.py."
 source: github.com/alirezarezvani/claude-skills
 original-name: monorepo-navigator
 ---

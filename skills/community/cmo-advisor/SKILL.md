@@ -1,6 +1,6 @@
 ---
 name: cmo-advisor
-description: "Marketing leadership for scaling companies. Brand positioning, growth model design, marketing budget allocation, and marketing org design. Use when designing brand strategy, selecting growth models (PLG vs sales-led vs community-led), allocating marketing budgets, building marketing teams, or when user mentions CMO, brand strategy, growth model, CAC, LTV, channel mix, or marketing ROI."
+description: "Marketing leadership: positioning, product-led vs sales-led vs community-led growth, budget split across channels, marketing team design. Use whenever the user asks how to grow, which go-to-market fits or where to spend."
 license: MIT
 metadata:
   version: 1.0.0
@@ -157,7 +157,7 @@ Draft a marketing strategy, then critique it from the customer's perspective. Re
 
 ## Communication
 
-All output passes the Internal Quality Loop before reaching the founder (see `agent-protocol/SKILL.md`).
+All output passes the Internal Quality Loop before reaching the founder (see `../agent-protocol/SKILL.md`).
 - Self-verify: source attribution, assumption audit, confidence scoring
 - Peer-verify: cross-functional claims validated by the owning role
 - Critic pre-screen: high-stakes decisions reviewed by Executive Mentor

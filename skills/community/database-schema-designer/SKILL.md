@@ -1,6 +1,6 @@
 ---
 name: database-schema-designer
-description: "Use when the user asks to create ERD diagrams, normalize database schemas, design table relationships, or plan schema migrations."
+description: "Use when asked for an ERD, table relationships, normalization or a schema migration plan. Produces the ERD and normalized DDL with migration steps."
 source: github.com/alirezarezvani/claude-skills
 original-name: database-schema-designer
 ---
@@ -248,4 +248,3 @@ npx prisma-erd-generator
 5. **Index foreign keys** — every FK column should have an index
 6. **Partial indexes** — use `WHERE deleted_at IS NULL` for active-only queries
 7. **RLS over application-level filtering** — database enforces tenancy, not just app code
-

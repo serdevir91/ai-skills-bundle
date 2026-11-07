@@ -1,6 +1,6 @@
 ---
 name: scenario-war-room
-description: "Cross-functional what-if modeling for cascading multi-variable scenarios. Unlike single-assumption stress testing, this models compound adversity across all business functions simultaneously. Use when facing complex risk scenarios, strategic decisions with major downside, or when the user asks 'what if X AND Y both happen?'"
+description: "Use for compound what-if questions ('what if X and Y both happen?') with major downside across functions. Models cascading scenarios with scenario_modeler.py."
 license: MIT
 metadata:
   version: 1.0.0
@@ -27,16 +27,15 @@ scenario planning, war room, what-if analysis, risk modeling, cascading effects,
 python scripts/scenario_modeler.py   # Interactive scenario builder with cascade modeling
 ```
 
-Or describe the scenario:
-```
-/war-room "What if we lose our top customer AND miss the Q3 fundraise?"
-/war-room "What if 3 engineers quit AND we need to ship by Q3?"
-/war-room "What if our market shrinks 30% AND a competitor raises $50M?"
-```
+Or describe the scenario in natural language:
+
+> "What if we lose our top customer AND miss the Q3 fundraise?"
+> "What if 3 engineers quit AND we need to ship by Q3?"
+> "What if our market shrinks 30% AND a competitor raises $50M?"
 
 ## What This Is Not
 
-- **Not** a single-assumption stress test (that's `/em:stress-test`)
+- **Not** a single-assumption stress test (that's `/executive-mentor:stress-test`)
 - **Not** financial modeling only — every function gets modeled
 - **Not** worst-case-only — models 3 severity levels
 - **Not** paralysis by analysis — outputs concrete hedges and triggers

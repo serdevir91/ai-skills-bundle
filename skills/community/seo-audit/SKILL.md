@@ -1,6 +1,6 @@
 ---
 name: seo-audit
-description: When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions "SEO audit," "technical SEO," "why am I not ranking," "SEO issues," "on-page SEO," "meta tags review," or "SEO health check." For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema-markup.
+description: "Find why a site is not ranking: technical SEO, on-page issues, meta tags, site health. Use whenever the user asks why a page is not on Google, why traffic dropped or for an SEO audit."
 license: MIT
 metadata:
   version: 1.0.0
@@ -40,14 +40,32 @@ Before auditing, understand:
 ---
 
 ## Audit Framework
-→ See references/seo-audit-reference.md for details
+
+The audit walks three layers — technical (crawl/indexation/speed), on-page (titles, headings, internal links, keyword targeting), content (intent match, E-E-A-T, thin/duplicate pages). Full framework: references/seo-audit-reference.md.
+
+**Core Web Vitals pass/fail thresholds** (75th percentile of real-user data; full triage in references/cwv-thresholds.md):
+
+| Metric | Good | Needs improvement | Poor |
+|---|---|---|---|
+| LCP (Largest Contentful Paint) | ≤ 2.5s | 2.5-4.0s | > 4.0s |
+| INP (Interaction to Next Paint) | ≤ 200ms | 200-500ms | > 500ms |
+| CLS (Cumulative Layout Shift) | ≤ 0.1 | 0.1-0.25 | > 0.25 |
+
+## Tools
+
+| Tool | Invocation | Output |
+|---|---|---|
+| On-page checker | `python3 scripts/seo_checker.py --file page.html` (or `--url https://...`; `--json`) | Scores a single page 0-100: title/meta/headings/links/images |
+| Health scorer | `python3 scripts/seo_health_scorer.py --checks checks.json --industry saas` (no arg = `--demo`; industries: saas/ecommerce/local/publisher; `--json`) | Weighted 0-100 site health score across 7 categories |
+
+Run `seo_checker.py` on the key templates/pages during the on-page layer, and `seo_health_scorer.py` on the completed check matrix to produce the audit's headline score.
 
 ## Output Format
 
 ### Audit Report Structure
 
 **Executive Summary**
-- Overall health assessment
+- Overall health assessment — lead with the `seo_health_scorer.py` score and its weakest categories
 - Top 3-5 priority issues
 - Quick wins identified
 
@@ -75,8 +93,10 @@ Same format as above
 
 ## References
 
-- [AI Writing Detection](references/ai-writing-detection.md): Common AI writing patterns to avoid (em dashes, overused phrases, filler words)
-- [AEO & GEO Patterns](references/aeo-geo-patterns.md): Content patterns optimized for answer engines and AI citation
+- [SEO Audit Reference](references/seo-audit-reference.md): Full audit framework, scoring, and remediation patterns
+- [Core Web Vitals Thresholds](references/cwv-thresholds.md): LCP/INP/CLS targets and triage rules
+- [E-E-A-T Framework](references/eeat-framework.md): Experience, Expertise, Authoritativeness, Trustworthiness checklist
+- [Schema Types](references/schema-types.md): Structured data patterns by content type
 
 ---
 
@@ -111,7 +131,7 @@ Same format as above
 ## Related Skills
 
 - **programmatic-seo** — WHEN: user wants to build SEO pages at scale after the audit identifies keyword gaps. WHEN NOT: don't use for diagnosing existing issues; stay in seo-audit mode.
-- **ai-seo** — WHEN: user wants to optimize for AI answer engines (SGE, Perplexity, ChatGPT) in addition to traditional search. WHEN NOT: don't use for purely technical crawl/indexation issues.
+- **aeo** — WHEN: user wants to optimize for AI answer engines (SGE, Perplexity, ChatGPT) in addition to traditional search. WHEN NOT: don't use for purely technical crawl/indexation issues.
 - **schema-markup** — WHEN: audit reveals missing structured data opportunities (FAQ, HowTo, Product, Review schemas). WHEN NOT: don't use as a standalone fix when core technical SEO is broken.
 - **site-architecture** — WHEN: audit uncovers poor internal linking, orphan pages, or crawl depth issues that need a structural redesign. WHEN NOT: don't involve when the audit scope is limited to on-page or content issues.
 - **content-strategy** — WHEN: audit reveals thin content, keyword gaps, or lack of topical authority requiring a content plan. WHEN NOT: don't use when the problem is purely technical (robots.txt, redirects, speed).

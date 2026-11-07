@@ -1,6 +1,6 @@
 ---
 name: senior-data-scientist
-description: World-class senior data scientist skill specialising in statistical modeling, experiment design, causal inference, and predictive analytics. Covers A/B testing (sample sizing, two-proportion z-tests, Bonferroni correction), difference-in-differences, feature engineering pipelines (Scikit-learn, XGBoost), cross-validated model evaluation (AUC-ROC, AUC-PR, SHAP), and MLflow experiment tracking — using Python (NumPy, Pandas, Scikit-learn), R, and SQL. Use when designing or analysing controlled experiments, building and evaluating classification or regression models, performing causal analysis on observational data, engineering features for structured tabular datasets, or translating statistical findings into data-driven business decisions.
+description: "Design experiments and analyze tabular data: A/B tests, causal inference, feature engineering, model evaluation. Use whenever the user asks how to set up or read an A/B test, whether a change caused a lift, which features to build, or how good a model is."
 source: github.com/alirezarezvani/claude-skills
 original-name: senior-data-scientist
 ---
@@ -210,16 +210,10 @@ def diff_in_diff(df, outcome, treatment_col, post_col, controls=None):
 python -m pytest tests/ -v --cov=src/
 python -m black src/ && python -m pylint src/
 
-# Training & evaluation
-python scripts/train.py --config prod.yaml
-python scripts/evaluate.py --model best.pth
-
-# Deployment
-docker build -t service:v1 .
-kubectl apply -f k8s/
-helm upgrade service ./charts/
-
-# Monitoring & health
-kubectl logs -f deployment/service
-python scripts/health_check.py
+# Bundled pipeline scaffolds (stdlib runners — extend the process() body with project logic)
+python3 scripts/experiment_designer.py --input experiment_spec.json --output experiment_design.json
+python3 scripts/feature_engineering_pipeline.py --input raw_features.json --output features.json
+python3 scripts/model_evaluation_suite.py --input model_predictions.json --output evaluation.json
+# Each prints a JSON run report ({status, processed_items, start/end_time}); any status other
+# than "completed" means the stage failed — fix before moving to the next pipeline stage.
 ```

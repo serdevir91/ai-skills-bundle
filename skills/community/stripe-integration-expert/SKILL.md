@@ -1,6 +1,6 @@
 ---
 name: stripe-integration-expert
-description: "Stripe Integration Expert"
+description: "Use for any Stripe integration: subscriptions, trials, proration, checkout, usage billing, webhooks, customer portal or invoicing in Next.js, Express or Django. Writes idempotent webhook handlers and debugs delivery failures."
 source: github.com/alirezarezvani/claude-skills
 original-name: stripe-integration-expert
 ---
@@ -476,4 +476,3 @@ export async function requireActiveSubscription() {
 - **Proration surprises** — always preview proration before upgrade; show user the amount before confirming
 - **Customer portal not configured** — must enable features in Stripe dashboard under Billing → Customer portal settings
 - **Missing metadata on checkout** — always pass `userId` in metadata; can't link subscription to user without it
-

@@ -1,14 +1,15 @@
 ---
 name: brand-guidelines
-description: When the user wants to apply, document, or enforce brand guidelines for any product or company. Also use when the user mentions 'brand guidelines,' 'brand colors,' 'typography,' 'logo usage,' 'brand voice,' 'visual identity,' 'tone of voice,' 'brand standards,' 'style guide,' 'brand consistency,' or 'company design standards.' Covers color systems, typography, logo rules, imagery guidelines, and tone matrix for any brand — including Anthropic's official identity.
+description: "Use when writing or enforcing brand guidelines (colors, typography, logo rules, imagery, tone of voice), or checking an asset against them. Builds the color system, type scale and tone matrix, including Anthropic's identity."
 license: MIT
-version: 1.0.0
-author: Alireza Rezvani
-category: marketing
-dependencies: None
-tier: BASIC
+metadata:
+  version: 1.0.0
+  author: Alireza Rezvani
+  category: marketing
+  updated: 2026-03-06
+source: github.com/alirezarezvani/claude-skills
+original-name: brand-guidelines
 ---
-
 
 # Brand Guidelines
 
@@ -92,27 +93,3 @@ Brand consistency is not a design preference — it's a trust signal. Every devi
 - **content-humanizer** — USE when existing content needs to be rewritten to match brand tone without losing information; NOT for structural content work.
 - **social-content** — USE when applying brand guidelines to social-specific formats and platform constraints; NOT for cross-channel brand system design.
 - **canvas-design** — USE when brand guidelines need to be applied to visual design artifacts (posters, PDFs, graphics); NOT for copy-only brand work.
-
-## Name
-
-Claude Community:Brand Guidelines
-
-## Description
-
-When the user wants to apply, document, or enforce brand guidelines for any product or company. Also use when the user mentions 'brand guidelines,' 'brand colors,' 'typography,' 'logo usage,' 'brand voice,' 'visual identity,' 'tone of voice,' 'brand standards,' 'style guide,' 'brand consistency,' or 'company design standards.' Covers color systems, typography, logo rules, imagery guidelines, and tone matrix for any brand — including Anthropic's official identity.
-
-## Examples
-
-### Basic Usage
-
-```
-User: Help me with brand guidelines
-Assistant: [Provides detailed guidance based on the skill's expertise]
-```
-
-### Advanced Usage
-
-```
-User: Apply brand guidelines to my current project
-Assistant: [Analyzes context and provides tailored recommendations]
-```

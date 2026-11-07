@@ -1,11 +1,8 @@
 ---
 name: playwright-pro/skills/generate
-description: >-
-  Generate Playwright tests. Use when user says "write tests", "generate tests",
-  "add tests for", "test this component", "e2e test", "create test for",
-  "test this page", or "test this feature".
+description: "Use when asked to write Playwright or e2e tests for a page, component or feature ('write tests', 'add tests for', 'e2e test')."
 source: github.com/alirezarezvani/claude-skills
-original-name: playwright-pro/skills/generate
+original-name: generate
 ---
 
 # Generate Playwright Tests
@@ -47,7 +44,7 @@ Check `templates/` in this plugin for matching patterns:
 
 | If testing... | Load template from |
 |---|---|
-| Login/auth flow | `templates/auth/login.md` |
+| Login/auth flow | `../pw/templates/auth/login.md` |
 | CRUD operations | `templates/crud/` |
 | Checkout/payment | `templates/checkout/` |
 | Search/filter UI | `templates/search/` |

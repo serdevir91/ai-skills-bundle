@@ -1,6 +1,6 @@
 ---
 name: founder-coach
-description: "Personal leadership development for founders and first-time CEOs. Covers founder archetype identification, delegation frameworks, energy management, CEO calendar audits, leadership style evolution, blind spot identification, imposter syndrome, founder mental health, and succession planning. Use when a founder feels like the bottleneck, struggles to delegate, is burning out, transitioning from IC to executive, managing a board, or when user mentions founder mode, CEO growth, leadership development, delegation, burnout, or imposter syndrome."
+description: "Use when a founder is the bottleneck, can't delegate, is burning out or is moving from IC to CEO. Covers delegation, energy and calendar audits, blind spots and succession."
 license: MIT
 metadata:
   version: 1.0.0
@@ -300,4 +300,3 @@ Most founders are at Level 0. Level 2 is a reasonable target. Level 3 is a strat
 ## Detailed References
 - `references/leadership-growth.md` — Maxwell levels, situational leadership, founder-to-CEO transition
 - `references/founder-toolkit.md` — Weekly reflection, energy audit, delegation matrix, 1:1 templates
-

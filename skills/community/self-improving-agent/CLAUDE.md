@@ -6,10 +6,10 @@ This plugin helps you curate Claude Code's auto-memory into durable project know
 
 Use the `/si:` namespace for all commands:
 
-- `/si:review` — Analyze auto-memory health and find promotion candidates
+- `/si:memory-review` — Analyze auto-memory health and find promotion candidates
 - `/si:promote <pattern>` — Graduate a learning to CLAUDE.md or `.claude/rules/`
 - `/si:extract <pattern>` — Create a reusable skill from a proven pattern
-- `/si:status` — Quick memory health dashboard
+- `/si:memory-status` — Quick memory health dashboard
 - `/si:remember <knowledge>` — Explicitly save something to auto-memory
 
 ## How auto-memory works
@@ -22,7 +22,7 @@ This plugin reads that directory — it never creates its own storage.
 
 ### After completing a feature or debugging session
 ```
-/si:review
+/si:memory-review
 ```
 Check if anything Claude learned should become a permanent rule.
 
@@ -40,7 +40,7 @@ Creates a standalone skill with SKILL.md, ready to install elsewhere.
 
 ### To check memory capacity
 ```
-/si:status
+/si:memory-status
 ```
 Shows line counts, topic files, stale entries, and recommendations.
 
@@ -55,14 +55,17 @@ Shows line counts, topic files, stale entries, and recommendations.
 
 ## Agents
 
-- **memory-analyst**: Spawned by `/si:review` to analyze patterns across memory files
+- **memory-analyst**: Spawned by `/si:memory-review` to analyze patterns across memory files
 - **skill-extractor**: Spawned by `/si:extract` to generate complete skill packages
 
 ## Hooks
 
 The `error-capture.sh` hook fires on `PostToolUse` (Bash only). It detects command failures and appends structured entries to auto-memory. Zero overhead on successful commands.
 
-To enable:
+When you install this plugin via `/plugin install self-improving-agent@claude-code-skills`, the hook is registered automatically from `.claude-plugin/hooks.json` — you don't need to configure anything manually.
+
+If you ever need to wire it up by hand (e.g. you copied the skill directly instead of installing as a plugin), use the `${CLAUDE_PLUGIN_ROOT}` variable so the path resolves against the plugin root rather than your current working directory:
+
 ```json
 // .claude/settings.json
 {
@@ -71,9 +74,11 @@ To enable:
       "matcher": "Bash",
       "hooks": [{
         "type": "command",
-        "command": "./skills/self-improving-agent/hooks/error-capture.sh"
+        "command": "${CLAUDE_PLUGIN_ROOT}/hooks/error-capture.sh"
       }]
     }]
   }
 }
 ```
+
+**Do not use a relative path like `./hooks/error-capture.sh`** — Claude Code resolves hook commands against the user's current working directory, not the plugin root. A relative path will silently fail (non-blocking) in every session started outside the plugin install dir.

@@ -1,6 +1,6 @@
 ---
 name: org-health-diagnostic
-description: "Cross-functional organizational health check combining signals from all C-suite roles. Scores 8 dimensions on a traffic-light scale with drill-down recommendations. Use when assessing overall company health, preparing for board reviews, identifying at-risk functions, or when user mentions org health, health check, or health dashboard."
+description: "Use for a whole-company health check before a board review or when functions seem at risk. Scores 8 dimensions on a traffic light with health_scorer.py."
 license: MIT
 metadata:
   version: 1.0.0
@@ -28,11 +28,10 @@ python scripts/health_scorer.py        # Guided CLI — enter metrics, get score
 python scripts/health_scorer.py --json # Output raw JSON for integration
 ```
 
-Or describe your metrics:
-```
-/health [paste your key metrics or answer prompts]
-/health:dimension [financial|revenue|product|engineering|people|ops|security|market]
-```
+Or describe your metrics in natural language:
+
+> "Run an org health check" — paste your key metrics or answer prompts
+> "Score our [financial|revenue|product|engineering|people|ops|security|market] health" — single-dimension deep dive
 
 ## The 8 Dimensions
 

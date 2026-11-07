@@ -1,6 +1,6 @@
 ---
 name: churn-prevention
-description: "Reduce voluntary and involuntary churn through cancel flow design, save offers, exit surveys, and dunning sequences. Use when designing or optimizing a cancel flow, building save offers, setting up dunning emails, or reducing failed-payment churn. Trigger keywords: cancel flow, churn reduction, save offers, dunning, exit survey, payment recovery, win-back, involuntary churn, failed payments, cancel page. NOT for customer health scoring or expansion revenue — use customer-success-manager for that."
+description: "Use when designing a cancel flow, save offers, exit surveys or dunning emails, or cutting failed-payment churn. Sizes the revenue at stake with churn_impact_calculator.py first. Health scores and expansion: customer-success-manager."
 license: MIT
 metadata:
   version: 1.0.0
@@ -20,7 +20,7 @@ Churn is a revenue leak you can plug. A 20% save rate on voluntary churners and 
 ## Before Starting
 
 **Check for context first:**
-If `marketing-context.md` exists, read it before asking questions. Use that context and only ask for what's missing.
+If `.claude/product-marketing-context.md` exists, read it before asking questions. Use that context and only ask for what's missing.
 
 Gather this context (ask if not provided):
 

@@ -1,13 +1,13 @@
 ---
 name: executive-mentor/skills/postmortem
-description: "/em -postmortem — Honest Analysis of What Went Wrong"
+description: "Use after a failed launch, missed quarter or bad hire. Runs a blameless 5-Whys with a change register."
 source: github.com/alirezarezvani/claude-skills
-original-name: executive-mentor/skills/postmortem
+original-name: postmortem
 ---
 
-# /em:postmortem — Honest Analysis of What Went Wrong
+# /executive-mentor:postmortem — Honest Analysis of What Went Wrong
 
-**Command:** `/em:postmortem <event>`
+**Command:** `/executive-mentor:postmortem <event>`
 
 Not blame. Understanding. The failed deal, the missed quarter, the feature that flopped, the hire that didn't work out. What actually happened, why, and what changes as a result.
 

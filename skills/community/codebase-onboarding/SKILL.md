@@ -1,6 +1,6 @@
 ---
 name: codebase-onboarding
-description: "Codebase Onboarding"
+description: "Explain an unfamiliar repo: architecture brief and onboarding docs. Use whenever someone is new to a codebase, asks how a project is structured or where to start reading."
 source: github.com/alirezarezvani/claude-skills
 original-name: codebase-onboarding
 ---

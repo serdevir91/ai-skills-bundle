@@ -66,6 +66,10 @@ Use this before feature work, before release hardening, and when auditing parity
 - Purchase/Restore flow works and entitlements persist across restarts.
 - Theme and amoled persistence survives app restart.
 
+## Project Patterns To Reuse
+
+Read [implementation-map.md](references/implementation-map.md) for concrete file-level patterns extracted from existing apps.
+
 ## Done Criteria
 - App supports light/dark/system and amoled mode with persistence.
 - App has startup update check and settings update action.

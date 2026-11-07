@@ -1,13 +1,13 @@
 ---
 name: executive-mentor/skills/board-prep
-description: "/em -board-prep — Board Meeting Preparation"
+description: "Use before a board meeting, investor update or fundraising pitch where the numbers will be challenged. Drills numbers cold, anticipates the hard questions and builds a narrative that admits weakness without losing the room."
 source: github.com/alirezarezvani/claude-skills
-original-name: executive-mentor/skills/board-prep
+original-name: board-prep
 ---
 
-# /em:board-prep — Board Meeting Preparation
+# /executive-mentor:board-prep — Board Meeting Preparation
 
-**Command:** `/em:board-prep <agenda>`
+**Command:** `/executive-mentor:board-prep <agenda>`
 
 Prepare for the adversarial version of your board, not the friendly one. Every hard question they'll ask. Every number you need cold. The narrative that acknowledges weakness without losing the room.
 

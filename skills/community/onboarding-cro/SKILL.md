@@ -1,6 +1,6 @@
 ---
 name: onboarding-cro
-description: When the user wants to optimize post-signup onboarding, user activation, first-run experience, or time-to-value. Also use when the user mentions "onboarding flow," "activation rate," "user activation," "first-run experience," "empty states," "onboarding checklist," "aha moment," or "new user experience." For signup/registration optimization, see signup-flow-cro. For ongoing email sequences, see email-sequence.
+description: "Use when activation, time-to-value or a first-run experience after signup needs work, before redesigning it. Finds the activation drop-off with activation_funnel_analyzer.py."
 license: MIT
 metadata:
   version: 1.0.0
@@ -166,14 +166,20 @@ Signup → Step 1 → Step 2 → Activation → Retention
 100%      80%       60%       40%         25%
 ```
 
-Identify biggest drops and focus there.
+Run the bundled analyzer on your step counts instead of eyeballing:
+
+```bash
+python3 scripts/activation_funnel_analyzer.py funnel.json --json   # no arg = embedded demo
+```
+
+It computes per-step drop-off, an activation score 0-100, and names the biggest-loss step. That step is where the audit focuses first.
 
 ---
 
 ## Output Format
 
 ### Onboarding Audit
-For each issue: Finding → Impact → Recommendation → Priority
+Lead with the analyzer's output: activation score + the named biggest-drop step. Then, for each issue: Finding → Impact → Recommendation → Priority
 
 ### Onboarding Flow Design
 - Activation goal
@@ -203,8 +209,6 @@ When recommending experiments, consider tests for:
 - Progress and motivation mechanics
 - Personalization by role or goal
 - Support and help availability
-
-**For comprehensive experiment ideas**: See [references/experiments.md](references/experiments.md)
 
 ---
 

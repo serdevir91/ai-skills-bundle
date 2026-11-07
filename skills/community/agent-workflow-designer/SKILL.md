@@ -1,6 +1,6 @@
 ---
 name: agent-workflow-designer
-description: "Agent Workflow Designer"
+description: "Use when architecting a multi-step LLM or agent pipeline, choosing single vs multi-agent, or fixing context bloat and broken handoffs. Scaffolds the pattern, handoff contracts and failure handling with workflow_scaffolder.py."
 source: github.com/alirezarezvani/claude-skills
 original-name: agent-workflow-designer
 ---

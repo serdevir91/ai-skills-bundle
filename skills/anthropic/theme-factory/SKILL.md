@@ -2,13 +2,9 @@
 name: theme-factory
 description: Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.
 license: Complete terms in LICENSE.txt
-version: 1.0.0
-author: Community
-category: general
-dependencies: None
-tier: BASIC
+source: github.com/anthropics/skills
+original-name: theme-factory
 ---
-
 
 
 # Theme Factory Skill
@@ -63,56 +59,3 @@ After a preferred theme is selected:
 
 ## Create your Own Theme
 To handle cases where none of the existing themes work for an artifact, create a custom theme. Based on provided inputs, generate a new theme similar to the ones above. Give the theme a similar name describing what the font/color combinations represent. Use any basic description provided to choose appropriate colors/fonts. After generating the theme, show it for review and verification. Following that, apply the theme as described above.
-
-## Name
-
-Anthropic:Theme Factory
-
-## Examples
-
-### Basic Usage
-
-```
-User: Help me with theme factory
-Assistant: [Provides detailed guidance based on the skill's expertise]
-```
-
-### Advanced Usage
-
-```
-User: Apply theme factory to my current project
-Assistant: [Analyzes context and provides tailored recommendations]
-```
-
-## Additional Information
-
-This skill provides specialized guidance for theme factory.
-
-### Key Capabilities
-
-- Comprehensive analysis and recommendations
-- Best practices implementation
-- Industry-standard approaches
-- Practical, actionable guidance
-
-### Best Practices
-
-1. Provide clear context when using this skill
-2. Specify your requirements and constraints
-3. Review generated suggestions before implementation
-4. Iterate and refine based on feedback
-
-### Tips
-
-- Be specific about your goals and constraints
-- Provide relevant background information
-- Ask follow-up questions for clarification
-- Combine with other skills for comprehensive solutions
-
-## Related Skills
-
-See the skills directory for complementary skills that may enhance your workflow.
-
-## Support
-
-For issues or questions, refer to the skill documentation or community resources.

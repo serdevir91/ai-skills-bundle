@@ -1,11 +1,8 @@
 ---
 name: playwright-pro/skills/migrate
-description: >-
-  Migrate from Cypress or Selenium to Playwright. Use when user mentions
-  "cypress", "selenium", "migrate tests", "convert tests", "switch to
-  playwright", "move from cypress", or "replace selenium".
+description: "Use when moving tests from Cypress or Selenium to Playwright ('migrate tests', 'convert tests', 'replace selenium')."
 source: github.com/alirezarezvani/claude-skills
-original-name: playwright-pro/skills/migrate
+original-name: migrate
 ---
 
 # Migrate to Playwright
@@ -49,7 +46,7 @@ Migration Assessment:
 
 ### 3. Set Up Playwright (If Not Present)
 
-Run `/pw:init` first if Playwright isn't configured.
+Run `/pw:pw-init` first if Playwright isn't configured.
 
 ### 4. Convert Files
 

@@ -1,6 +1,6 @@
 ---
 name: chro-advisor
-description: "People leadership for scaling companies. Hiring strategy, compensation design, org structure, culture, and retention. Use when building hiring plans, designing comp frameworks, restructuring teams, managing performance, building culture, or when user mentions CHRO, HR, people strategy, talent, headcount, compensation, org design, retention, or performance management."
+description: "People strategy: hiring plans, comp bands, org structure, performance, retention. Use whenever the user asks who to hire, what to pay, how to structure teams or why staff leave."
 license: MIT
 metadata:
   version: 1.0.0
@@ -132,7 +132,7 @@ Start with the human impact, then validate with metrics. Every people decision m
 
 ## Communication
 
-All output passes the Internal Quality Loop before reaching the founder (see `agent-protocol/SKILL.md`).
+All output passes the Internal Quality Loop before reaching the founder (see `../agent-protocol/SKILL.md`).
 - Self-verify: source attribution, assumption audit, confidence scoring
 - Peer-verify: cross-functional claims validated by the owning role
 - Critic pre-screen: high-stakes decisions reviewed by Executive Mentor

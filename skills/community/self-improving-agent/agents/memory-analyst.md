@@ -1,3 +1,11 @@
+---
+name: memory-analyst
+description: Read-only analyst for `~/.claude/projects/<project>/memory/`. Identifies promotion candidates (entries proven enough for CLAUDE.md), stale references, consolidation opportunities, conflicts with existing CLAUDE.md rules, and reports health metrics (capacity, freshness, organization). Spawned by `/si:memory-review`.
+tools: Read, Glob, Grep
+model: inherit
+maxTurns: 30
+---
+
 # Memory Analyst Agent
 
 You are a memory analyst for Claude Code projects. Your job is to analyze the auto-memory directory and produce actionable insights.
@@ -64,7 +72,7 @@ Organize findings into:
 
 ## Output Format
 
-Use the format defined in the `/si:review` skill. Be specific — include line numbers, exact text, and concrete suggestions.
+Use the format defined in the `/si:memory-review` skill. Be specific — include line numbers, exact text, and concrete suggestions.
 
 ## Constraints
 

@@ -1,6 +1,6 @@
 ---
 name: env-secrets-manager
-description: "Env & Secrets Manager"
+description: "Use when auditing .env files, planning credential rotation, chasing a missing env var in production or hardening a repo against leaked secrets. Scans for committed secrets and drift with env_auditor.py."
 source: github.com/alirezarezvani/claude-skills
 original-name: env-secrets-manager
 ---
@@ -83,7 +83,7 @@ python3 scripts/env_auditor.py /path/to/repo --json
 
 ## Cloud Secret Store Integration
 
-Production applications should never read secrets from `.env` files or environment variables baked into container images. Use a dedicated secret store instead.
+Production applications should never read secrets from `.env` files or environment variables baked into container images. Use a dedicated secret store instead. <!-- noqa: SEC-AUDITOR (advice against reading secrets from .env) -->
 
 ### Provider Comparison
 

@@ -1,6 +1,6 @@
 ---
 name: cto-advisor
-description: "Technical leadership guidance for engineering teams, architecture decisions, and technology strategy. Use when assessing technical debt, scaling engineering teams, evaluating technologies, making architecture decisions, establishing engineering metrics, or when user mentions CTO, tech debt, technical debt, team scaling, architecture decisions, technology evaluation, engineering metrics, DORA metrics, or technology strategy."
+description: "CTO decisions: tech debt, architecture direction, scaling the engineering team, technology evaluation, DORA metrics. Use whenever the user asks whether to rewrite, how to grow the eng team or which tech to bet on."
 license: MIT
 metadata:
   version: 2.0.0
@@ -240,7 +240,7 @@ Research the technical landscape first. Analyze options against constraints (tim
 
 ## Communication
 
-All output passes the Internal Quality Loop before reaching the founder (see `agent-protocol/SKILL.md`).
+All output passes the Internal Quality Loop before reaching the founder (see `../agent-protocol/SKILL.md`).
 - Self-verify: source attribution, assumption audit, confidence scoring
 - Peer-verify: cross-functional claims validated by the owning role
 - Critic pre-screen: high-stakes decisions reviewed by Executive Mentor

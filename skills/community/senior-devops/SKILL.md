@@ -1,6 +1,6 @@
 ---
 name: senior-devops
-description: Comprehensive DevOps skill for CI/CD, infrastructure automation, containerization, and cloud platforms (AWS, GCP, Azure). Includes pipeline setup, infrastructure as code, deployment automation, and monitoring. Use when setting up pipelines, deploying applications, managing infrastructure, implementing monitoring, or optimizing deployment processes.
+description: "Set up CI/CD pipelines, infrastructure as code, containers and deployments on AWS, GCP or Azure. Use whenever the user needs a build or deploy pipeline, Terraform, a Dockerfile, or wants to manage a release to the cloud."
 source: github.com/alirezarezvani/claude-skills
 original-name: senior-devops
 ---
@@ -22,8 +22,8 @@ python scripts/pipeline_generator.py ./app --platform=github --stages=build,test
 # Script 2: Terraform Scaffolder — generates and validates IaC modules for AWS/GCP/Azure
 python scripts/terraform_scaffolder.py ./infra --provider=aws --module=ecs-service --verbose
 
-# Script 3: Deployment Manager — orchestrates container deployments with rollback support
-python3 scripts/deployment_manager.py ./deploy --verbose --json
+# Script 3: Deployment Manager — generates deployment manifests + runbooks with rollback support
+python3 scripts/deployment_manager.py deploy --env=staging --image=app:1.2.3 --strategy=blue-green --verbose --json
 ```
 
 ## Core Capabilities
@@ -149,7 +149,7 @@ python scripts/terraform_scaffolder.py <target-path> --provider=aws|gcp|azure --
 
 ### 3. Deployment Manager
 
-Orchestrates deployments with blue/green or rolling strategies, health-check gates, and automatic rollback on failure.
+Generates Kubernetes deployment manifests and ordered kubectl runbooks for blue/green or rolling strategies, with health-check gates before traffic switches and rollback runbooks. The tool writes manifests and prints the commands — it never applies them to a cluster itself, so every change gets a human review.
 
 **Example — Kubernetes blue/green deployment (blue-slot specific elements):**
 ```yaml

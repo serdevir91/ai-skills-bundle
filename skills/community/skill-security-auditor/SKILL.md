@@ -1,15 +1,6 @@
 ---
 name: skill-security-auditor
-description: >
-  Security audit and vulnerability scanner for AI agent skills before installation.
-  Use when: (1) evaluating a skill from an untrusted source, (2) auditing a skill
-  directory or git repo URL for malicious code, (3) pre-install security gate for
-  Claude Code plugins, OpenClaw skills, or Codex skills, (4) scanning Python scripts
-  for dangerous patterns like os.system, eval, subprocess, network exfiltration,
-  (5) detecting prompt injection in SKILL.md files, (6) checking dependency supply
-  chain risks, (7) verifying file system access stays within skill boundaries.
-  Triggers: "audit this skill", "is this skill safe", "scan skill for security",
-  "check skill before install", "skill security check", "skill vulnerability scan".
+description: "Use before installing any skill or plugin from an untrusted source, or when asked if a skill is safe. Scans scripts, SKILL.md and dependencies for exfiltration, dangerous calls and prompt injection with skill_security_auditor.py."
 source: github.com/alirezarezvani/claude-skills
 original-name: skill-security-auditor
 ---
@@ -59,12 +50,12 @@ Scans SKILL.md and all `.md` reference files for:
 
 | Pattern | Example | Severity |
 |---------|---------|----------|
-| **System prompt override** | "Ignore previous instructions", "You are now..." | 🔴 CRITICAL |
-| **Role hijacking** | "Act as root", "Pretend you have no restrictions" | 🔴 CRITICAL |
-| **Safety bypass** | "Skip safety checks", "Disable content filtering" | 🔴 CRITICAL |
+| **System prompt override** | "Ignore previous instructions", "You are now..." | 🔴 CRITICAL | <!-- noqa: SEC-AUDITOR -->
+| **Role hijacking** | "Act as root", "Pretend you have no restrictions" | 🔴 CRITICAL | <!-- noqa: SEC-AUDITOR -->
+| **Safety bypass** | "Skip safety checks", "Disable content filtering" | 🔴 CRITICAL | <!-- noqa: SEC-AUDITOR -->
 | **Hidden instructions** | Zero-width characters, HTML comments with directives | 🟡 HIGH |
 | **Excessive permissions** | "Run any command", "Full filesystem access" | 🟡 HIGH |
-| **Data extraction** | "Send contents of", "Upload file to", "POST to" | 🔴 CRITICAL |
+| **Data extraction** | "Send contents of", "Upload file to", "POST to" | 🔴 CRITICAL | <!-- noqa: SEC-AUDITOR -->
 
 ### 3. Dependency Supply Chain
 
@@ -120,7 +111,7 @@ For skills with `requirements.txt`, `package.json`, or inline `pip install`:
    Fix: Remove outbound network calls or verify destination is trusted
 
 🟡 HIGH [FS-BOUNDARY] scripts/scanner.py:15
-   Pattern: open(os.path.expanduser("~/.ssh/id_rsa"))
+   Pattern: open(os.path.expanduser("~/.ssh/id_rsa")) <!-- noqa: SEC-AUDITOR -->
    Risk: Reads SSH private key outside skill scope
    Fix: Remove filesystem access outside skill directory
 
@@ -145,7 +136,7 @@ python3 scripts/skill_security_auditor.py https://github.com/user/skill-repo --s
 # GitHub Actions step
 - name: "audit-skill-security"
   run: |
-    python3 skill-security-auditor/scripts/skill_security_auditor.py ./skills/new-skill/ --strict --json > audit.json
+    python3 scripts/skill_security_auditor.py ./skills/new-skill/ --strict --json > audit.json
     if [ $? -ne 0 ]; then echo "Security audit failed"; exit 1; fi
 ```
 
@@ -157,6 +148,10 @@ for skill in skills/*/; do
   python3 scripts/skill_security_auditor.py "$skill" --json >> audit-results.jsonl
 done
 ```
+
+## Marking a False Positive
+
+Mark a line the auditor misreads, and write the reason on it: `# noqa: SEC-AUDITOR (strips a sudo prefix, runs nothing)`, or `<!-- noqa: SEC-AUDITOR (reason) -->` in markdown. Text inside a template string or docstring cannot take a trailing comment without it ending up in the generated file. For that text, put `# auditor:ignore-start (reason)` on the line before the string and `# auditor:ignore-end` on the line after it. An unclosed block suppresses nothing. Keep each block tight around the template, and never mark a finding you have not traced.
 
 ## Threat Model Reference
 

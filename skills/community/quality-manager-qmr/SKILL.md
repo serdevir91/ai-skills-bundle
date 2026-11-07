@@ -1,19 +1,20 @@
 ---
 name: quality-manager-qmr
-description: Senior Quality Manager Responsible Person (QMR) for HealthTech and MedTech companies. Provides quality system governance, management review leadership, regulatory compliance oversight, and quality performance monitoring per ISO 13485 Clause 5.5.2.
-triggers:
-  - management review
-  - quality policy
-  - quality objectives
-  - QMR responsibilities
-  - quality system effectiveness
-  - quality KPIs
-  - cost of quality
-  - quality performance
-  - management accountability
-  - regulatory oversight
-  - quality culture
-  - quality governance
+description: "Use for QMR duties under ISO 13485 5.5.2: management review, quality policy and objectives, quality KPIs and cost of quality. Tracks reviews with management_review_tracker.py and monitors effectiveness with quality_effectiveness_monitor.py."
+metadata:
+  triggers:
+    - management review
+    - quality policy
+    - quality objectives
+    - QMR responsibilities
+    - quality system effectiveness
+    - quality KPIs
+    - cost of quality
+    - quality performance
+    - management accountability
+    - regulatory oversight
+    - quality culture
+    - quality governance
 source: github.com/alirezarezvani/claude-skills
 original-name: quality-manager-qmr
 ---
@@ -348,7 +349,7 @@ Monitor and maintain regulatory compliance across jurisdictions.
 | Jurisdiction | Regulation | Requirement | Status Tracking |
 |--------------|------------|-------------|-----------------|
 | EU | MDR 2017/745 | CE marking, Notified Body | Technical file, annual review |
-| USA | 21 CFR 820 | FDA registration, QSR compliance | Annual registration, inspections |
+| USA | 21 CFR 820 (QMSR) | FDA registration, QMSR compliance — 21 CFR 820 incorporates ISO 13485:2016 by reference (effective 2026-02-02; formerly the QSR) | Annual registration, inspections |
 | International | ISO 13485 | QMS certification | Surveillance audits |
 | Germany | MPG/MPDG | National implementation | Competent authority filings |
 
@@ -362,6 +363,8 @@ Monitor and maintain regulatory compliance across jurisdictions.
 6. Document compliance status in management review
 7. Maintain inspection readiness checklist
 8. **Validation:** All applicable requirements mapped; no expired registrations
+
+> **Decision discipline:** This compliance matrix is decision support, not a compliance determination. Final regulatory-status calls are yours to make as QMR and must be signed off by the named owner; route FDA-specific questions to Regulatory Affairs and verify current 21 CFR 820 (QMSR) / ISO 13485:2016 text at fda.gov before relying on any citation here.
 
 ### Regulatory Authority Interface
 

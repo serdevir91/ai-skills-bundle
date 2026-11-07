@@ -1,6 +1,6 @@
 ---
 name: runbook-generator
-description: "Runbook Generator"
+description: "Use when a service needs runbooks for deploy, incident response, maintenance or rollback, before launch. Generates them per environment with runbook_generator.py."
 source: github.com/alirezarezvani/claude-skills
 original-name: runbook-generator
 ---

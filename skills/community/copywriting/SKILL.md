@@ -1,6 +1,6 @@
 ---
 name: copywriting
-description: "When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says \"write copy for,\" \"improve this copy,\" \"rewrite this page,\" \"marketing copy,\" \"headline help,\" or \"CTA copy.\" For email copy, see email-sequence. For popup copy, see popup-cro."
+description: "Use for any headline, tagline, CTA, landing, pricing or about-page copy request, before drafting. Scores candidate headlines with headline_scorer.py and applies a page-section framework, so the first draft is tested rather than guessed."
 license: MIT
 metadata:
   version: 1.0.0
@@ -123,6 +123,15 @@ Puns and wit make copy memorable—but only if it fits the brand and doesn't und
 - "The {category} for {audience}"
 - "Never {unpleasant event} again"
 - "{Question highlighting main pain point}"
+
+**Score every headline candidate** with the bundled scorer before picking one:
+
+```bash
+python3 scripts/headline_scorer.py "Ship dashboards in minutes, not sprints"
+python3 scripts/headline_scorer.py --file headlines.txt --json   # batch-score a list
+```
+
+It rates 0-100 across 6 dimensions (length, specificity, power words, clarity, emotional pull, format). Write 5-10 candidates, score them all, present the top 2-3 with their scores and dimension breakdowns — never present a sub-60 headline as the primary recommendation.
 
 **For comprehensive headline formulas**: See [references/copy-frameworks.md](references/copy-frameworks.md)
 

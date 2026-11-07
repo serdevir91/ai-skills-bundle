@@ -1,13 +1,13 @@
 ---
 name: executive-mentor/skills/stress-test
-description: "/em -stress-test — Business Assumption Stress Testing"
+description: "Stress-test a plan built on untested assumptions. Use whenever the user bets on a hockey-stick model or long pilot."
 source: github.com/alirezarezvani/claude-skills
-original-name: executive-mentor/skills/stress-test
+original-name: stress-test
 ---
 
-# /em:stress-test — Business Assumption Stress Testing
+# /executive-mentor:stress-test — Business Assumption Stress Testing
 
-**Command:** `/em:stress-test <assumption>`
+**Command:** `/executive-mentor:stress-test <assumption>`
 
 Take any business assumption and break it before the market does. Revenue projections. Market size. Competitive moat. Hiring velocity. Customer retention.
 

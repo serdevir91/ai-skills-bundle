@@ -1,6 +1,6 @@
 ---
 name: migration-architect
-description: "Migration Architect"
+description: "Plan a migration with zero or minimal downtime: phased plan, compatibility check, rollback scripts, for schemas, databases and services. Load whenever the user must change a live table, move a database or cut over without downtime."
 source: github.com/alirezarezvani/claude-skills
 original-name: migration-architect
 ---
@@ -34,6 +34,25 @@ The Migration Architect skill provides comprehensive tools and methodologies for
 - **Data Recovery Scripts:** Create point-in-time data restoration procedures
 - **Service Rollback:** Plan service version rollbacks with traffic management
 - **Validation Checkpoints:** Define success criteria and rollback triggers
+
+## Quick Start — plan → check compatibility → generate rollback
+
+All paths relative to this skill folder; sample inputs in `assets/`, expected shapes in `expected_outputs/`.
+
+```bash
+# 1. Generate the migration plan from a spec (copy assets/sample_database_migration.json)
+python3 scripts/migration_planner.py --input migration_spec.json --format json -o migration_plan.json
+
+# 2. Check schema/API compatibility — exits non-zero unless fully compatible (CI gate)
+python3 scripts/compatibility_checker.py --before assets/database_schema_before.json --after assets/database_schema_after.json --type database --format json -o compatibility.json
+
+# 3. Generate the rollback runbook from the plan
+python3 scripts/rollback_generator.py --input migration_plan.json --format both -o rollback_runbook
+```
+
+Outputs chain: `migration_plan.json` (`phases`, `risks`, `estimated_duration_hours`) feeds step 3; `compatibility.json` reports `overall_compatibility` plus `breaking_changes_count` / `potentially_breaking_count`.
+
+**Gate:** the migration is not approved until (a) `compatibility_checker` exits 0 (`overall_compatibility: compatible`) or every breaking/potentially-breaking item is explicitly accepted by the owner in writing, and (b) a rollback runbook exists for every phase in the plan. Re-run both checks after any schema revision.
 
 ## Migration Patterns
 
@@ -340,74 +359,6 @@ class MigrationCircuitBreaker:
 - [ ] Archive migration artifacts
 - [ ] Update disaster recovery procedures
 
-## Communication Templates
-
-### Executive Summary Template
-```
-Migration Status: [IN_PROGRESS | COMPLETED | ROLLED_BACK]
-Start Time: [YYYY-MM-DD HH:MM UTC]
-Current Phase: [X of Y]
-Overall Progress: [X%]
-
-Key Metrics:
-- System Availability: [X.XX%]
-- Data Migration Progress: [X.XX%]
-- Performance Impact: [+/-X%]
-- Issues Encountered: [X]
-
-Next Steps:
-1. [Action item 1]
-2. [Action item 2]
-
-Risk Assessment: [LOW | MEDIUM | HIGH]
-Rollback Status: [AVAILABLE | NOT_AVAILABLE]
-```
-
-### Technical Team Update Template
-```
-Phase: [Phase Name] - [Status]
-Duration: [Started] - [Expected End]
-
-Completed Tasks:
-✓ [Task 1]
-✓ [Task 2]
-
-In Progress:
-🔄 [Task 3] - [X% complete]
-
-Upcoming:
-⏳ [Task 4] - [Expected start time]
-
-Issues:
-⚠️ [Issue description] - [Severity] - [ETA resolution]
-
-Metrics:
-- Migration Rate: [X records/minute]
-- Error Rate: [X.XX%]
-- System Load: [CPU/Memory/Disk]
-```
-
-## Success Metrics
-
-### Technical Metrics
-- **Migration Completion Rate:** Percentage of data/services successfully migrated
-- **Downtime Duration:** Total system unavailability during migration
-- **Data Consistency Score:** Percentage of data validation checks passing
-- **Performance Delta:** Performance change compared to baseline
-- **Error Rate:** Percentage of failed operations during migration
-
-### Business Metrics
-- **Customer Impact Score:** Measure of customer experience degradation
-- **Revenue Protection:** Percentage of revenue maintained during migration
-- **Time to Value:** Duration from migration start to business value realization
-- **Stakeholder Satisfaction:** Post-migration stakeholder feedback scores
-
-### Operational Metrics
-- **Plan Adherence:** Percentage of migration executed according to plan
-- **Issue Resolution Time:** Average time to resolve migration issues
-- **Team Efficiency:** Resource utilization and productivity metrics
-- **Knowledge Transfer Score:** Team readiness for post-migration operations
-
 ## Tools and Technologies
 
 ### Migration Planning Tools
@@ -478,3 +429,11 @@ resource "aws_instance" "green_environment" {
 ```
 
 This Migration Architect skill provides a comprehensive framework for planning, executing, and validating complex system migrations while minimizing business impact and technical risk. The combination of automated tools, proven patterns, and detailed procedures enables organizations to confidently undertake even the most complex migration projects.
+
+## More in this skill
+
+Load these only when the task needs them.
+
+- [references/data_reconciliation_strategies.md](references/data_reconciliation_strategies.md) — Data Reconciliation Strategies
+- [references/migration_patterns_catalog.md](references/migration_patterns_catalog.md) — Migration Patterns Catalog
+- [references/zero_downtime_techniques.md](references/zero_downtime_techniques.md) — Zero-Downtime Migration Techniques

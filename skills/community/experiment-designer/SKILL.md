@@ -1,6 +1,6 @@
 ---
 name: experiment-designer
-description: Use when planning product experiments, writing testable hypotheses, estimating sample size, prioritizing tests, or interpreting A/B outcomes with practical statistical rigor.
+description: "Plan A/B tests and product experiments: hypotheses, sample size, priority, reading results. Use whenever the user asks if a test won, how long to run it or what to test."
 source: github.com/alirezarezvani/claude-skills
 original-name: experiment-designer
 ---

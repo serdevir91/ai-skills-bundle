@@ -1,11 +1,8 @@
 ---
 name: playwright-pro/skills/testrail
-description: >-
-  Sync tests with TestRail. Use when user mentions "testrail", "test management",
-  "test cases", "test run", "sync test cases", "push results to testrail",
-  or "import from testrail".
+description: "Use when syncing Playwright tests with TestRail ('testrail', 'sync test cases', 'push results to testrail', 'import from testrail')."
 source: github.com/alirezarezvani/claude-skills
-original-name: playwright-pro/skills/testrail
+original-name: testrail
 ---
 
 # TestRail Integration
@@ -20,6 +17,14 @@ Environment variables must be set:
 - `TESTRAIL_API_KEY` — API key from TestRail
 
 If not set, inform the user how to configure them and stop.
+
+> **The TestRail MCP server is not auto-registered (issue #978).** `pw-testrail`
+> was removed from the plugin's `.mcp.json` because it failed to connect for every
+> user (the plugin ships no `node_modules`). The `testrail_*` MCP tools used below,
+> and the `/pw:testrail` command, will fail with "tool not found" until it is
+> enabled manually — see the **Integrations** section of the plugin's `CLAUDE.md`
+> (`cd integrations/testrail-mcp && npm install`, then register the server in your
+> own user/project MCP config). Setting the env vars alone is not sufficient.
 
 ## Capabilities
 

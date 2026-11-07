@@ -1,17 +1,18 @@
 ---
 name: senior-ml-engineer
-description: ML engineering skill for productionizing models, building MLOps pipelines, and integrating LLMs. Covers model deployment, feature stores, drift monitoring, RAG systems, and cost optimization. Use when the user asks about deploying ML models to production, setting up MLOps infrastructure (MLflow, Kubeflow, Kubernetes, Docker), monitoring model performance or drift, building RAG pipelines, or integrating LLM APIs with retry logic and cost controls. Focused on production and operational concerns rather than model research or initial training.
-triggers:
-  - MLOps pipeline
-  - model deployment
-  - feature store
-  - model monitoring
-  - drift detection
-  - RAG system
-  - LLM integration
-  - model serving
-  - A/B testing ML
-  - automated retraining
+description: "Use for putting ML models or LLM features into production: deployment, MLOps, drift monitoring, RAG pipelines, LLM API cost and retries. Deploys with model_deployment_pipeline.py, monitors with ml_monitoring_suite.py and builds RAG with rag_system_builder.py."
+metadata:
+  triggers:
+    - MLOps pipeline
+    - model deployment
+    - feature store
+    - model monitoring
+    - drift detection
+    - RAG system
+    - LLM integration
+    - model serving
+    - A/B testing ML
+    - automated retraining
 source: github.com/alirezarezvani/claude-skills
 original-name: senior-ml-engineer
 ---
@@ -151,12 +152,23 @@ def call_llm_with_retry(provider: LLMProvider, prompt: str) -> str:
 
 ### Cost Management
 
-| Provider | Input Cost | Output Cost |
-|----------|------------|-------------|
-| GPT-4 | $0.03/1K | $0.06/1K |
-| GPT-3.5 | $0.0005/1K | $0.0015/1K |
-| Claude 3 Opus | $0.015/1K | $0.075/1K |
-| Claude 3 Haiku | $0.00025/1K | $0.00125/1K |
+Do not hardcode prices, and do not trust a price table you find in a document
+(including this one). Providers reprice several times a year, and a stale
+figure produces a confidently wrong business case.
+
+Work in tiers and look the current numbers up at request time:
+
+| Tier | Typical use | Relative cost |
+|------|-------------|---------------|
+| Small | Classification, extraction, routing, short output | 1x baseline |
+| Mid | Summarisation, structured output, moderate reasoning | ~10-25x small |
+| Large | Multi-step reasoning, code generation, long context | ~50-100x small |
+
+Read the live rate from your provider's pricing page and pass it in, the way
+`engineering-team/skills/senior-prompt-engineer/scripts/prompt_optimizer.py`
+takes `--price-per-mtok`.
+The ratios between tiers are far more stable than the absolute prices, so
+build the model-routing decision on the ratio.
 
 ---
 

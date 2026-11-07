@@ -1,6 +1,6 @@
 ---
 name: sales-engineer
-description: Analyzes RFP/RFI responses for coverage gaps, builds competitive feature comparison matrices, and plans proof-of-concept (POC) engagements for pre-sales engineering. Use when responding to RFPs, bids, or proposal requests; comparing product features against competitors; planning or scoring a customer POC or sales demo; preparing a technical proposal; or performing win/loss competitor analysis. Handles tasks described as 'RFP response', 'bid response', 'proposal response', 'competitor comparison', 'feature matrix', 'POC planning', 'sales demo prep', or 'pre-sales engineering'.
+description: "Use for pre-sales work: RFP coverage gaps, competitive feature matrices or planning and scoring a proof of concept. Runs rfp_response_analyzer.py, competitive_matrix_builder.py and poc_planner.py."
 source: github.com/alirezarezvani/claude-skills
 original-name: sales-engineer
 ---
@@ -213,9 +213,9 @@ python scripts/poc_planner.py poc_data.json --format json  # JSON output
 
 ## Integration Points
 
-- **Marketing Skills** - Leverage competitive intelligence and messaging frameworks from `../../marketing-skill/`
-- **Product Team** - Coordinate on roadmap items flagged as "Planned" in RFP analysis from `../../product-team/`
-- **C-Level Advisory** - Escalate strategic deals requiring executive engagement from `../../c-level-advisor/`
+- **Marketing Skills** - Leverage competitive intelligence and messaging frameworks from `marketing-skill/`
+- **Product Team** - Coordinate on roadmap items flagged as "Planned" in RFP analysis from `product-team/`
+- **C-Level Advisory** - Escalate strategic deals requiring executive engagement from `c-level-advisor/`
 - **Customer Success** - Hand off POC results and success criteria to CSM from `../customer-success-manager/`
 
 ---

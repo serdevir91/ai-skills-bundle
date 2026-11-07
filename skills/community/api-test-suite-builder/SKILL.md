@@ -1,6 +1,6 @@
 ---
 name: api-test-suite-builder
-description: "Use when the user asks to generate API tests, create integration test suites, test REST endpoints, or build contract tests."
+description: "Use when asked to write API, integration or contract tests for REST endpoints. Builds the suite from the routes: happy paths, auth, validation errors and edge cases per endpoint."
 source: github.com/alirezarezvani/claude-skills
 original-name: api-test-suite-builder
 ---
@@ -177,4 +177,3 @@ When given a codebase, follow this process:
 5. Test that sensitive fields (password, secret) are never in responses
 6. For auth tests, always test the "missing header" case separately from "invalid token"
 7. Add rate limit tests last — they can interfere with other test suites if run in parallel
-

@@ -1,6 +1,6 @@
 ---
 name: email-template-builder
-description: "Email Template Builder"
+description: "Use when adding or reworking transactional email (React Email templates, Resend, Postmark, SendGrid or SES, preview, i18n, dark mode, deliverability). Builds the template system and provider integration end to end."
 source: github.com/alirezarezvani/claude-skills
 original-name: email-template-builder
 ---
@@ -363,8 +363,8 @@ export async function sendEmail(to: string, payload: EmailPayload) {
 // emails/i18n/en.ts
 export const en = {
   welcome: {
-    preview: (name: "string-welcome-to-myapp-name"
-    heading: (name: "string-welcome-to-myapp-name"
+    preview: (name: string) => `Welcome to MyApp, ${name}!`,
+    heading: (name: string) => `Welcome to MyApp, ${name}!`,
     body: (days: number) => `You've got ${days} days to explore everything.`,
     cta: "Confirm Email Address",
   },
@@ -373,8 +373,8 @@ export const en = {
 // emails/i18n/de.ts
 export const de = {
   welcome: {
-    preview: (name: "string-willkommen-bei-myapp-name"
-    heading: (name: "string-willkommen-bei-myapp-name"
+    preview: (name: string) => `Willkommen bei MyApp, ${name}!`,
+    heading: (name: string) => `Willkommen bei MyApp, ${name}!`,
     body: (days: number) => `Du hast ${days} Tage Zeit, alles zu erkunden.`,
     cta: "E-Mail-Adresse bestätigen",
   },
@@ -439,4 +439,3 @@ export function addTrackingParams(html: string, params: TrackingParams): string 
 - **Dark mode media queries** — must use `!important` to override inline styles
 - **Missing plain text** — all major providers have a plain text field; always populate it
 - **Transactional vs marketing** — use separate sending domains/IPs to protect deliverability
-

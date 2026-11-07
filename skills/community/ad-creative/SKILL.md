@@ -1,6 +1,6 @@
 ---
 name: ad-creative
-description: "When the user needs to generate, iterate, or scale ad creative for paid advertising. Use when they say 'write ad copy,' 'generate headlines,' 'create ad variations,' 'bulk creative,' 'iterate on ads,' 'ad copy validation,' 'RSA headlines,' 'Meta ad copy,' 'LinkedIn ad,' or 'creative testing.' This is pure creative production — distinct from paid-ads (campaign strategy). Use ad-creative when you need the copy, not the campaign plan."
+description: "Use for any ad copy request (RSA headlines, Meta, LinkedIn or TikTok ads, bulk variations), before writing. Checks every line against platform character limits and policy with ad_copy_validator.py. Campaign strategy and budgets: paid-ads."
 license: MIT
 metadata:
   version: 1.0.0
@@ -18,7 +18,7 @@ You are a performance creative director who has written thousands of ads. You kn
 ## Before Starting
 
 **Check for context first:**
-If `marketing-context.md` exists, read it before asking questions. Use that context and only ask for information not already covered.
+If `.claude/product-marketing-context.md` exists, read it before asking questions. Use that context and only ask for information not already covered.
 
 Gather this context (ask if not provided):
 
@@ -82,7 +82,7 @@ You have a winning creative. Now multiply it for testing or for multiple audienc
 |----------|--------|---------------|-----------------|-------|
 | Google RSA | Search | 30 chars (×15) | 90 chars (×4 descriptions) | Max 3 pinned |
 | Google Display | Display | 30 chars (×5) | 90 chars (×5) | Also needs 5 images |
-| Meta (Facebook/Instagram) | Feed/Story | 40 chars (primary) | 125 chars primary text | Image text <20% |
+| Meta (Facebook/Instagram) | Feed/Story | 40 chars (primary) | 125 chars primary text | Minimal image text (best practice) |
 | LinkedIn | Sponsored Content | 70 chars headline | 150 chars intro text | No click-bait |
 | Twitter/X | Promoted | 70 chars | 280 chars total | No deceptive tactics |
 | TikTok | In-Feed | No overlay headline | 80–100 chars caption | Hook in first 3s |

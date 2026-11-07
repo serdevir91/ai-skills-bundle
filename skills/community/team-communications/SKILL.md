@@ -1,14 +1,9 @@
 ---
 name: team-communications
-description: Write internal company communications — 3P updates (Progress/Plans/Problems), company-wide newsletters, FAQ roundups, incident reports, leadership updates, status reports, project updates, and general internal comms. Use this skill any time the user asks to draft, edit, or format something meant for internal audiences. Trigger on keywords like "3P", "weekly update", "newsletter", "FAQ", "internal comms", "status report", "company update", "team update", "incident report", or any request to summarize work for leadership, teammates, or the broader company. Even casual requests like "write my update" or "summarize what my team did this week" should trigger this skill.
-license: MIT
-version: 1.0.0
-author: Community
-category: general
-dependencies: None
-tier: BASIC
+description: "Use for any internal communication: 3P updates, weekly or status reports, newsletters, FAQs, incident reports, leadership updates ('write my update'). Drafts it in the right format for the audience."
+source: github.com/alirezarezvani/claude-skills
+original-name: team-communications
 ---
-
 
 # Internal Comms
 
@@ -72,41 +67,3 @@ If the user hasn't connected Slack, Gmail, Drive, or Calendar, don't stall. Ask 
 | `project-management/meeting-analyzer` | Meeting insights can feed into 3P updates and status reports |
 | `project-management/confluence-expert` | Publish comms as Confluence pages for permanent record |
 | `marketing-skill/content-production` | External comms — use for public-facing content, not internal |
-
-## Name
-
-Claude Community:Team Communications
-
-## Description
-
-Write internal company communications — 3P updates (Progress/Plans/Problems), company-wide newsletters, FAQ roundups, incident reports, leadership updates, status reports, project updates, and general internal comms. Use this skill any time the user asks to draft, edit, or format something meant for internal audiences. Trigger on keywords like "3P", "weekly update", "newsletter", "FAQ", "internal comms", "status report", "company update", "team update", "incident report", or any request to summarize work for leadership, teammates, or the broader company. Even casual requests like "write my update" or "summarize what my team did this week" should trigger this skill.
-
-## Usage
-
-### How to Use
-
-1. Activate this skill by mentioning relevant keywords
-2. Provide your specific requirements or context
-3. Review and apply the generated output
-
-### Example Prompts
-
-- "Help me with team communications"
-- "I need assistance with team communications for my project"
-- "Apply team communications best practices"
-
-## Examples
-
-### Basic Usage
-
-```
-User: Help me with team communications
-Assistant: [Provides detailed guidance based on the skill's expertise]
-```
-
-### Advanced Usage
-
-```
-User: Apply team communications to my current project
-Assistant: [Analyzes context and provides tailored recommendations]
-```

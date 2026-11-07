@@ -1,6 +1,6 @@
 ---
 name: prompt-engineer-toolkit
-description: "Analyzes and rewrites prompts for better AI output, creates reusable prompt templates for marketing use cases (ad copy, email campaigns, social media), and structures end-to-end AI content workflows. Use when the user wants to improve prompts for AI-assisted marketing, build prompt templates, or optimize AI content workflows. Also use when the user mentions 'prompt engineering,' 'improve my prompts,' 'AI writing quality,' 'prompt templates,' or 'AI content workflow.'"
+description: "Use when a marketing team's AI prompts need testing, versioning or governance, before shipping a prompt. A/B tests prompts against cases with prompt_tester.py and keeps diffed versions with prompt_versioner.py."
 license: MIT
 metadata:
   version: 1.0.0
@@ -108,9 +108,9 @@ python3 scripts/prompt_versioner.py changelog --name support_classifier
 
 ## References
 
-- [references/prompt-templates.md](references/prompt-templates.md)
-- [references/technique-guide.md](references/technique-guide.md)
-- [references/evaluation-rubric.md](references/evaluation-rubric.md)
+- [references/prompt-templates.md](references/prompt-templates.md) — 6 production marketing templates (ad copy, email sequence, social repurposing, landing sections, SEO meta, brand-voice rewrite) plus generic building blocks; each written to be graded by `prompt_tester.py`
+- [references/technique-guide.md](references/technique-guide.md) — technique-selection table for marketing tasks + the LLM-governance stack for marketing teams (claim discipline, disclosure rules, data boundaries, human-review gates)
+- [references/evaluation-rubric.md](references/evaluation-rubric.md) — mechanical scoring weights, acceptance gates, marketing quality dimensions, test-suite design, and eval anti-patterns
 - [README.md](README.md)
 
 ## Evaluation Design

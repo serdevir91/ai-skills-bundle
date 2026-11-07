@@ -1,6 +1,6 @@
 ---
 name: page-cro
-description: When the user wants to optimize, improve, or increase conversions on any marketing page — including homepage, landing pages, pricing pages, feature pages, or blog posts. Also use when the user says "CRO," "conversion rate optimization," "this page isn't converting," "improve conversions," or "why isn't this page working." For signup/registration flows, see signup-flow-cro. For post-signup activation, see onboarding-cro. For forms outside of signup, see form-cro. For popups/modals, see popup-cro.
+description: "Fix a page that is not converting: section by section audit with fixes ranked by impact. Use whenever a homepage, landing, pricing or feature page gets few signups, sales or clicks."
 license: MIT
 metadata:
   version: 1.0.0
@@ -110,9 +110,19 @@ Analyze the page across these dimensions, in order of impact:
 
 ---
 
+## Tools
+
+| Tool | Invocation | Output |
+|---|---|---|
+| Conversion audit | `python3 scripts/conversion_audit.py --file page.html` (or `--url https://...`; `--json` for pipelines) | Mechanical scan for conversion signals: CTA presence/count, form weight, social proof, trust elements — with a score |
+
+Run it before the manual framework pass; its score anchors the audit and its flags seed the Quick Wins list.
+
+---
+
 ## Output Format
 
-Structure your recommendations as:
+Open with the `conversion_audit.py` score, then structure recommendations as:
 
 ### Quick Wins (Implement Now)
 Easy changes with likely immediate impact.
@@ -164,8 +174,6 @@ When recommending experiments, consider tests for:
 - Pricing presentation
 - Form optimization
 - Navigation and UX
-
-**For comprehensive experiment ideas by page type**: See [references/experiments.md](references/experiments.md)
 
 ---
 

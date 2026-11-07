@@ -1,16 +1,6 @@
 ---
 name: epic-design
-description: >
-  Build immersive, cinematic 2.5D interactive websites using scroll storytelling,
-  parallax depth, text animations, and premium scroll effects — no WebGL required.
-  Use this skill for any web design task: landing pages, product sites, hero sections,
-  scroll animations, parallax, sticky sections, section overlaps, floating products
-  between sections, clip-path reveals, text that flies in from sides, words that light
-  up on scroll, curtain drops, iris opens, card stacks, bleed typography, and any
-  site that should feel cinematic or premium. Trigger on phrases like "make it feel
-  alive", "Apple-style animation", "sections that overlap", "product rises between
-  sections", "immersive", "scrollytelling", or any scroll-driven visual effect.
-  Covers 45+ techniques across 8 categories. Always inspects, judges, and plans assets before coding. Use aggressively for ANY web design task.
+description: "Use for any landing page, hero section or scroll-driven web design that should feel cinematic (parallax, scrollytelling, overlapping sections, text reveals, Apple-style animation), before coding. Inspects assets with inspect-assets.py, then builds with 45+ 2.5D techniques, no WebGL."
 license: MIT
 metadata:
   version: 1.0.0
@@ -23,7 +13,7 @@ original-name: epic-design
 
 # Epic Design Skill
 
-You are now a **world-class epic design expert**. You build cinematic, immersive websites that feel premium and alive — using only flat PNG/static assets, CSS, and JavaScript. No WebGL, no 3D modeling software required.
+With this skill you work as a **world-class epic design expert**. You build cinematic, immersive websites that feel premium and alive — using only flat PNG/static assets, CSS, and JavaScript. No WebGL, no 3D modeling software required.
 
 ## Before Starting
 
@@ -67,6 +57,7 @@ Before writing a single line of code, do ALL of the following in order.
 ### B. Inspect every uploaded image asset
 
 Run `scripts/inspect-assets.py` on every image the user has provided.
+> **Optional runtime dependency:** `pip install Pillow` — required for image analysis, not for `--help`.
 For each image, determine:
 
 1. **Format** — JPEG never has a real alpha channel. PNG may have a fake one.
@@ -243,9 +234,9 @@ These are MANDATORY in every output:
 </section>
 ```
 
-→ Full boilerplate: `assets/hero-section.html`
-→ Full CSS system: `assets/hero-section.css`
-→ Full JS engine: `assets/hero-section.js`
+→ Full-page implementations built on this structure: `references/examples.md`
+→ Layer CSS and depth values: `references/depth-system.md`
+→ Scroll and motion engine: `references/motion-system.md`
 
 ---
 
@@ -254,7 +245,6 @@ These are MANDATORY in every output:
 | File | What's Inside | When to Read |
 |------|--------------|--------------|
 | `references/asset-pipeline.md` | Asset inspection, bg judgment rules, user notification format, CSS knockout, resize targets | ALWAYS — run before coding anything |
-| `references/cursor-microinteractions.md` | Custom cursor, particle bursts, magnetic hover, tilt effects | When building interactive premium sites |
 | `references/depth-system.md` | 6-layer depth model, CSS/JS implementation, blur/scale formulas | Every project — always read |
 | `references/motion-system.md` | 9 scroll architecture patterns with complete GSAP code | When building scroll interactions |
 | `references/text-animations.md` | 13 text techniques with full implementation code | When animating any text |

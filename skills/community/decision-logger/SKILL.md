@@ -1,6 +1,6 @@
 ---
 name: decision-logger
-description: "Two-layer memory architecture for board meeting decisions. Manages raw transcripts (Layer 1) and approved decisions (Layer 2). Use when logging decisions after a board meeting, reviewing past decisions with /cs:decisions, or checking overdue action items with /cs:review. Invoked automatically by the board-meeting skill after Phase 5 founder approval."
+description: "Use when logging a decision after a board meeting, reviewing past decisions or checking overdue actions. Keeps raw transcripts and approved decisions separately with decision_tracker.py."
 license: MIT
 metadata:
   version: 1.0.0
@@ -18,7 +18,7 @@ original-name: decision-logger
 Two-layer memory system. Layer 1 stores everything. Layer 2 stores only what the founder approved. Future meetings read Layer 2 only — this prevents hallucinated consensus from past debates bleeding into new deliberations.
 
 ## Keywords
-decision log, memory, approved decisions, action items, board minutes, /cs:decisions, /cs:review, conflict detection, DO_NOT_RESURFACE
+decision log, memory, approved decisions, action items, board minutes, /decision-logger decisions, /decision-logger review, conflict detection, DO_NOT_RESURFACE
 
 ## Quick Start
 
@@ -37,30 +37,34 @@ python scripts/decision_tracker.py --search "pricing" # Search decisions
 
 | Command | Effect |
 |---------|--------|
-| `/cs:decisions` | Last 10 approved decisions |
-| `/cs:decisions --all` | Full history |
-| `/cs:decisions --owner CMO` | Filter by owner |
-| `/cs:decisions --topic pricing` | Search by keyword |
-| `/cs:review` | Action items due within 7 days |
-| `/cs:review --overdue` | Items past deadline |
+| `/decision-logger decisions` | Last 10 approved decisions |
+| `/decision-logger decisions --all` | Full history |
+| `/decision-logger decisions --owner CMO` | Filter by owner |
+| `/decision-logger decisions --topic pricing` | Search by keyword |
+| `/decision-logger review` | Action items due within 7 days |
+| `/decision-logger review --overdue` | Items past deadline |
 
 ---
 
 ## Two-Layer Architecture
 
+Storage follows the canonical two-layer decision memory (see `../agent-protocol/SKILL.md` → "Decision Memory (Canonical Layout)") — the same layout `/c-level-agents:decide` writes.
+
 ### Layer 1 — Raw Transcripts
-**Location:** `memory/board-meetings/YYYY-MM-DD-raw.md`
+**Location:** `~/.claude/decisions/raw/YYYY-MM-DD-<slug>.md`
 - Full Phase 2 agent contributions, Phase 3 critique, Phase 4 synthesis
 - All debates, including rejected arguments
 - **NEVER auto-loaded.** Only on explicit founder request.
-- Archive after 90 days → `memory/board-meetings/archive/YYYY/`
+- Archive after 90 days → `~/.claude/decisions/raw/archive/YYYY/`
 
 ### Layer 2 — Approved Decisions
-**Location:** `memory/board-meetings/decisions.md`
+**Location:** `~/.claude/decisions/approved/` — one record per decision (`YYYY-MM-DD-<slug>.md`) plus the append-only index `decisions.md`
 - ONLY founder-approved decisions, action items, user corrections
 - **Loaded automatically in Phase 1 of every board meeting**
 - Append-only. Decisions are never deleted — only superseded.
 - Managed by Chief of Staff after Phase 5. Never written by agents directly.
+
+Migration: a legacy `memory/board-meetings/` folder may exist from earlier versions; read it for history but write all new entries to `~/.claude/decisions/`.
 
 ---
 
@@ -85,7 +89,7 @@ python scripts/decision_tracker.py --search "pricing" # Search decisions
 
 **Supersedes:** [DATE of previous decision on same topic, if any]
 **Superseded by:** [Filled in retroactively if overridden later]
-**Raw transcript:** memory/board-meetings/[DATE]-raw.md
+**Raw transcript:** ~/.claude/decisions/raw/[DATE]-<slug>.md
 ```
 
 ---
@@ -117,10 +121,10 @@ To reopen: founder must explicitly say "reopen [topic] from [DATE]".
 ## Logging Workflow (Post Phase 5)
 
 1. Founder approves synthesis
-2. Write Layer 1 raw transcript → `YYYY-MM-DD-raw.md`
-3. Check conflicts against `decisions.md`
+2. Write Layer 1 raw transcript → `~/.claude/decisions/raw/YYYY-MM-DD-<slug>.md`
+3. Check conflicts against `~/.claude/decisions/approved/decisions.md`
 4. Surface conflicts → wait for founder resolution
-5. Append approved entries to `decisions.md`
+5. Write the approved record to `~/.claude/decisions/approved/YYYY-MM-DD-<slug>.md` and append to the index `decisions.md`
 6. Confirm: decisions logged, actions tracked, DO_NOT_RESURFACE flags added
 
 ---
@@ -138,10 +142,11 @@ Never delete completed items. The history is the record.
 ## File Structure
 
 ```
-memory/board-meetings/
-├── decisions.md       # Layer 2: append-only, founder-approved
-├── YYYY-MM-DD-raw.md  # Layer 1: full transcript per meeting
-└── archive/YYYY/      # Raw files after 90 days
+~/.claude/decisions/
+├── raw/YYYY-MM-DD-<slug>.md        # Layer 1: full transcript per meeting
+├── raw/archive/YYYY/               # Raw files after 90 days
+├── approved/YYYY-MM-DD-<slug>.md   # Layer 2: one record per approved decision
+└── approved/decisions.md           # Layer 2 index: append-only, founder-approved
 ```
 
 ---

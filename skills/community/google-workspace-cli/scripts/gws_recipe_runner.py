@@ -1,25 +1,37 @@
 #!/usr/bin/env python3
 """
-Google Workspace CLI Recipe Runner — Catalog, search, and execute gws recipes.
+Google Workspace CLI Recipe Runner — Catalog, search, and execute gws command templates.
 
-Browse 43 built-in recipes, filter by persona, search by keyword,
-and run with dry-run support.
+Browse 43 recipe command templates (a LOCAL catalog shipped with this skill —
+NOT built into the gws CLI), filter by persona, search by keyword, and run
+with dry-run support.
+
+IMPORTANT: The gws CLI (github.com/googleworkspace/cli) generates its command
+surface dynamically from Google's Discovery Service. Command strings in this
+catalog are templates — verify each against `gws --help`, `gws <service> --help`,
+or `gws schema <service>.<resource>.<method>` before relying on it.
 
 Usage:
     python3 gws_recipe_runner.py --list
     python3 gws_recipe_runner.py --search "email"
     python3 gws_recipe_runner.py --describe standup-report
     python3 gws_recipe_runner.py --run standup-report --dry-run
+    python3 gws_recipe_runner.py --run standup-report --yes
     python3 gws_recipe_runner.py --persona pm --list
     python3 gws_recipe_runner.py --list --json
 """
 
 import argparse
 import json
+import shlex
 import subprocess
 import sys
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Optional
+
+
+TEMPLATE_NOTE = ("NOTE: Recipe commands are templates from this local catalog (not shipped by "
+                 "the gws CLI). Verify each against 'gws --help' / 'gws schema' before use.")
 
 
 @dataclass
@@ -76,22 +88,22 @@ RECIPES: Dict[str, Recipe] = {
                                "gws calendar events insert primary --summary {title} "
                                "--start {start} --end {end} --attendees {attendees}"
                            ]),
-    "quick-event": Recipe("quick-event", "Create event from natural language", "calendar",
-                          ["calendar"], ["gws helpers quick-event {text}"]),
-    "find-time": Recipe("find-time", "Find available time slots for a meeting", "calendar",
-                        ["calendar"], ["gws helpers find-time --attendees {attendees} --duration {minutes} --within {date_range}"]),
+    "quick-event": Recipe("quick-event", "Create an event via the calendar helper", "calendar",
+                          ["calendar"], ["gws calendar +insert {details}  # see: gws calendar +insert --help"]),
+    "find-time": Recipe("find-time", "Find available time slots via free/busy", "calendar",
+                        ["calendar"], ["gws calendar freebusy query --json '<freebusy-request>'  # verify: gws schema calendar.freebusy.query"]),
     "today-schedule": Recipe("today-schedule", "Show today's calendar events", "calendar",
                              ["calendar"], ["gws calendar events list primary --timeMin {today_start} --timeMax {today_end} --json"]),
     "meeting-prep": Recipe("meeting-prep", "Prepare for an upcoming meeting (agenda + attendees)", "calendar",
-                           ["calendar"], ["gws recipes meeting-prep --event-id {event_id}"]),
+                           ["calendar"], ["gws workflow +meeting-prep"]),
     "reschedule": Recipe("reschedule", "Move an event to a new time", "calendar",
                          ["calendar"], ["gws calendar events patch primary {event_id} --start {new_start} --end {new_end}"]),
 
     # Reporting (5)
     "standup-report": Recipe("standup-report", "Generate daily standup from calendar and tasks", "reporting",
-                             ["calendar", "tasks"], ["gws recipes standup-report --json"]),
+                             ["calendar", "tasks"], ["gws workflow +standup-report"]),
     "weekly-summary": Recipe("weekly-summary", "Summarize week's emails, events, and tasks", "reporting",
-                             ["gmail", "calendar", "tasks"], ["gws recipes weekly-summary --json"]),
+                             ["gmail", "calendar", "tasks"], ["gws workflow +weekly-digest"]),
     "drive-activity": Recipe("drive-activity", "Report on Drive file activity", "reporting",
                              ["drive"], ["gws drive activities list --json"]),
     "email-stats": Recipe("email-stats", "Email volume statistics", "reporting",
@@ -294,10 +306,11 @@ def describe_recipe(name: str, output_json: bool):
     print(f"\n  Commands:")
     for i, cmd in enumerate(recipe.commands, 1):
         print(f"    {i}. {cmd}")
+    print(f"\n  {TEMPLATE_NOTE}")
     print(f"\n{'='*60}\n")
 
 
-def run_recipe(name: str, dry_run: bool):
+def run_recipe(name: str, dry_run: bool, confirmed: bool):
     """Execute a recipe (or print commands in dry-run mode)."""
     recipe = RECIPES.get(name)
     if not recipe:
@@ -308,17 +321,34 @@ def run_recipe(name: str, dry_run: bool):
         print(f"\n  [DRY RUN] Recipe: {recipe.name}\n")
         for i, cmd in enumerate(recipe.commands, 1):
             print(f"  {i}. {cmd}")
+        print(f"\n  {TEMPLATE_NOTE}")
         print(f"\n  (No commands executed)")
         return
 
-    print(f"\n  Executing recipe: {recipe.name}\n")
+    if not confirmed:
+        print(f"\n  Refusing to execute recipe '{recipe.name}' without --yes.")
+        print(f"  These commands may have real, irreversible side effects (sending mail,")
+        print(f"  deleting files, sharing data, etc). Preview first with --dry-run, then")
+        print(f"  re-run with: --run {recipe.name} --yes")
+        print(f"\n  {TEMPLATE_NOTE}")
+        sys.exit(1)
+
+    print(f"\n  Executing recipe: {recipe.name}")
+    print(f"  {TEMPLATE_NOTE}\n")
     for cmd in recipe.commands:
         if cmd.startswith("#"):
             print(f"  {cmd}")
             continue
         print(f"  $ {cmd}")
         try:
-            result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
+            argv = shlex.split(cmd, comments=True)
+        except ValueError as e:
+            print(f"  Could not parse command: {e}")
+            continue
+        if not argv:
+            continue
+        try:
+            result = subprocess.run(argv, shell=False, capture_output=True, text=True, timeout=30)
             if result.stdout:
                 print(result.stdout)
             if result.returncode != 0 and result.stderr:
@@ -356,6 +386,7 @@ Examples:
   %(prog)s --search "email"                 # Search by keyword
   %(prog)s --describe standup-report        # Full recipe details
   %(prog)s --run standup-report --dry-run   # Preview recipe commands
+  %(prog)s --run standup-report --yes       # Actually execute a recipe
   %(prog)s --personas                       # List all 10 personas
   %(prog)s --list --json                    # JSON output
         """,
@@ -365,6 +396,8 @@ Examples:
     parser.add_argument("--describe", help="Show full details for a recipe")
     parser.add_argument("--run", help="Execute a recipe")
     parser.add_argument("--dry-run", action="store_true", help="Print commands without executing")
+    parser.add_argument("--yes", action="store_true",
+                         help="Confirm execution of a real (non-dry-run) recipe; required to actually run commands")
     parser.add_argument("--persona", help="Filter recipes by persona")
     parser.add_argument("--personas", action="store_true", help="List all personas")
     parser.add_argument("--json", action="store_true", help="Output JSON")
@@ -391,7 +424,7 @@ Examples:
         return
 
     if args.run:
-        run_recipe(args.run, args.dry_run)
+        run_recipe(args.run, args.dry_run, args.yes)
         return
 
 

@@ -1,6 +1,6 @@
 ---
 name: coo-advisor
-description: "Operations leadership for scaling companies. Process design, OKR execution, operational cadence, and scaling playbooks. Use when designing operations, setting up OKRs, building processes, scaling teams, analyzing bottlenecks, planning operational cadence, or when user mentions COO, operations, process improvement, OKRs, scaling, operational efficiency, or execution."
+description: "Use for operations leadership: process design, OKR execution, operating cadence, bottlenecks or scaling playbooks. Tracks OKRs with okr_tracker.py and analyzes efficiency with ops_efficiency_analyzer.py."
 license: MIT
 metadata:
   version: 1.0.0
@@ -125,7 +125,7 @@ Map processes sequentially. Identify each step, handoff, and decision point. Fin
 
 ## Communication
 
-All output passes the Internal Quality Loop before reaching the founder (see `agent-protocol/SKILL.md`).
+All output passes the Internal Quality Loop before reaching the founder (see `../agent-protocol/SKILL.md`).
 - Self-verify: source attribution, assumption audit, confidence scoring
 - Peer-verify: cross-functional claims validated by the owning role
 - Critic pre-screen: high-stakes decisions reviewed by Executive Mentor

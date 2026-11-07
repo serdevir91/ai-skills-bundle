@@ -22,6 +22,15 @@ from typing import Any, Dict, List, Tuple, Optional, Set
 from urllib.parse import urlparse
 from dataclasses import dataclass, field
 
+# Windows consoles often default to a legacy codepage (e.g. cp1252) that cannot
+# encode the Unicode glyphs this script prints (issue #969). Re-encode
+# stdout/stderr as UTF-8 with replacement so output never crashes at print time.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
+
 
 @dataclass
 class LintIssue:
@@ -826,6 +835,35 @@ class APILinter:
         return "\n".join(report_lines)
 
 
+# Embedded sample OpenAPI spec — intentionally imperfect (a verb in a URL, a
+# snake_case property) so --sample produces a representative report.
+SAMPLE_OPENAPI_SPEC = {
+    "openapi": "3.0.0",
+    "info": {"title": "Sample API", "version": "1.0.0"},
+    "servers": [{"url": "https://api.example.com"}],
+    "paths": {
+        "/user-profiles/{userId}": {
+            "get": {
+                "summary": "Get a user profile",
+                "responses": {"200": {"description": "OK"}, "404": {"description": "Not found"}},
+                "parameters": [{"name": "userId", "in": "path", "required": True}],
+            }
+        },
+        "/user-profiles/create": {
+            "post": {
+                "summary": "Create a user profile (verb-in-URL anti-pattern)",
+                "responses": {"201": {"description": "Created"}},
+            }
+        },
+    },
+    "components": {
+        "schemas": {
+            "UserProfile": {"properties": {"first_name": {"type": "string"}}}
+        }
+    },
+}
+
+
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -836,12 +874,20 @@ Examples:
   python api_linter.py openapi.json
   python api_linter.py --format json openapi.json > report.json
   python api_linter.py --raw-endpoints endpoints.json
+  python api_linter.py --sample --format json
         """
     )
-    
+
     parser.add_argument(
         'input_file',
+        nargs='?',
         help='Input file: OpenAPI/Swagger JSON file or raw endpoints JSON'
+    )
+
+    parser.add_argument(
+        '--sample',
+        action='store_true',
+        help='Lint an embedded sample OpenAPI spec (no input file needed)'
     )
     
     parser.add_argument(
@@ -863,17 +909,22 @@ Examples:
     )
     
     args = parser.parse_args()
-    
-    # Load input file
-    try:
-        with open(args.input_file, 'r') as f:
-            input_data = json.load(f)
-    except FileNotFoundError:
-        print(f"Error: Input file '{args.input_file}' not found.", file=sys.stderr)
-        return 1
-    except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON in '{args.input_file}': {e}", file=sys.stderr)
-        return 1
+
+    # Load input data — from the embedded sample or the input file
+    if args.sample:
+        input_data = SAMPLE_OPENAPI_SPEC
+    else:
+        if not args.input_file:
+            parser.error("input_file is required (or use --sample)")
+        try:
+            with open(args.input_file, 'r') as f:
+                input_data = json.load(f)
+        except FileNotFoundError:
+            print(f"Error: Input file '{args.input_file}' not found.", file=sys.stderr)
+            return 1
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in '{args.input_file}': {e}", file=sys.stderr)
+            return 1
     
     # Initialize linter and run analysis
     linter = APILinter()

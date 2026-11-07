@@ -1,9 +1,8 @@
 ---
 name: self-improving-agent/skills/remember
-description: "Explicitly save important knowledge to auto-memory with timestamp and context. Use when a discovery is too important to rely on auto-capture."
-command: /si:remember
+description: "Save something important to auto-memory with a timestamp and context. Use whenever the user says remember this, note it for next time or don't forget, wants you to stop repeating a mistake across sessions, or a discovery is too important for auto-capture."
 source: github.com/alirezarezvani/claude-skills
-original-name: self-improving-agent/skills/remember
+original-name: remember
 ---
 
 # /si:remember — Save Knowledge Explicitly
@@ -62,7 +61,7 @@ Keep entries concise — one line when possible. Auto-memory entries don't need 
 If MEMORY.md is over 180 lines, warn the user:
 
 ```
-⚠️ MEMORY.md is at {{n}}/200 lines. Consider running /si:review to free space.
+⚠️ MEMORY.md is at {{n}}/200 lines. Consider running /si:memory-review to free space.
 ```
 
 ### Step 4: Suggest promotion
