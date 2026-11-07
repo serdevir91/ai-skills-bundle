@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flutter Feature Baseline"
+  short_description: "Enforce shared Flutter app UX and release feature baseline."
+  default_prompt: "Use $flutter-feature-baseline to apply theme, update, and review baseline features to this Flutter app."

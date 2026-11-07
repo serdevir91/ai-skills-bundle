@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flutter Feature Audit"
+  short_description: "Audit Flutter projects for required UX and release features."
+  default_prompt: "Use $flutter-feature-audit to scan Flutter projects and report baseline feature coverage."
